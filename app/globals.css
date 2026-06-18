@@ -1,0 +1,255 @@
+/*app/globals.css*/
+
+/*variables*/
+:root {
+  --parchment: #F0E8DC;
+  --linen: #E8DDD0;
+  --charcoal: #1C1814;
+  --burgundy: #7D2535;
+  --sienna: #B85C2A;
+  --burgundy-deep: #5A1A26;
+  --text-primary: #1C1814;
+  --text-secondary: rgba(28, 24, 20, 0.62);
+  --text-tertiary: rgba(28, 24, 20, 0.38);
+  --border-subtle: rgba(125, 37, 53, 0.08);
+  --border-medium: rgba(125, 37, 53, 0.14);
+  --shadow-warm: rgba(125, 37, 53, 0.08);
+  --shadow-warm-lg: rgba(125, 37, 53, 0.12);
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+  --space-12: 5rem;
+  --space-16: 7rem;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --max-width: 1600px;
+}
+
+/*reset*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--parchment);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+::selection {
+  background: var(--burgundy);
+  color: var(--parchment);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--linen);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--burgundy);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sienna);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 3px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 4px;
+}
+
+/*utilities*/
+.eyebrow {
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-weight: 500;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1.5px;
+  background: var(--burgundy);
+  opacity: 0.4;
+}
+
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--charcoal);
+  margin-bottom: var(--space-5);
+  letter-spacing: -0.01em;
+}
+
+.sec-title em {
+  font-style: italic;
+  color: var(--burgundy);
+}
+
+/*gradients*/
+.ap-portrait-1 {
+  background: linear-gradient(155deg, #EDD5C8 0%, #D9B5A0 25%, #C49780 55%, #A87B68 75%, #8B6856 100%);
+}
+
+.ap-portrait-2 {
+  background: linear-gradient(135deg, #F2E3D5 0%, #E0C8B5 30%, #C9A88A 60%, #B08968 85%, #997152 100%);
+}
+
+.ap-portrait-3 {
+  background: linear-gradient(145deg, #F5E8DC 0%, #E6D0BE 25%, #D1B39C 50%, #BA9478 75%, #A0765C 100%);
+}
+
+.ap-spiritual-1 {
+  background: linear-gradient(160deg, #4A2545 0%, #6B3668 25%, #8B4789 50%, #A858A5 70%, #C46BC1 85%, #D98CD6 100%);
+}
+
+.ap-spiritual-2 {
+  background: linear-gradient(140deg, #2B1B3D 0%, #4A2C5E 30%, #6A3F7F 55%, #8B52A0 75%, #AC66C1 90%, #CD7AE2 100%);
+}
+
+.ap-glass-1 {
+  background: linear-gradient(150deg, #C8CDD4 0%, #A8B0BA 25%, #8891A0 50%, #687386 75%, #4A566C 100%);
+}
+
+.ap-glass-2 {
+  background: linear-gradient(135deg, #D8DDE4 0%, #BCC4CF 30%, #9FA9B8 60%, #828FA2 85%, #66758C 100%);
+}
+
+.ap-painting-1 {
+  background: linear-gradient(145deg, #F0E8DC 0%, #D9C4A8 25%, #C2A47A 50%, #AB844C 75%, #946420 100%);
+}
+
+.ap-painting-2 {
+  background: linear-gradient(160deg, #E8DDD0 0%, #CEB89A 30%, #B49368 60%, #9A6E38 85%, #804910 100%);
+}
+
+.ap-custom-1 {
+  background: linear-gradient(155deg, #7D2535 0%, #9B3545 25%, #B85C2A 50%, #D47330 75%, #F08A38 100%);
+}
+
+.ap-mural-1 {
+  background: linear-gradient(140deg, #1C1814 0%, #3D2F28 25%, #5E463C 50%, #7D2535 70%, #B85C2A 100%);
+}
+
+/*animations*/
+.reveal,
+.reveal-l,
+.reveal-r {
+  opacity: 0;
+  transition: opacity 0.85s ease, transform 0.85s var(--ease-out);
+}
+
+.reveal {
+  transform: translateY(32px);
+}
+
+.reveal-l {
+  transform: translateX(-32px);
+}
+
+.reveal-r {
+  transform: translateX(32px);
+}
+
+.reveal.in,
+.reveal-l.in,
+.reveal-r.in {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(30px, 40px) scale(1.05);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
