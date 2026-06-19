@@ -1,98 +1,125 @@
-//components/Hero.tsx
-
+// components/Hero.tsx
 'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePolaroidTilt } from '@/hooks/usePolaroidTilt';
+import { CONTACT } from '@/lib/constants';
 
 export default function Hero() {
     usePolaroidTilt();
 
+    const polaroids = [
+        { src: '/assets/1.jpg', label: 'Couple Portrait', alt: 'Couple Portrait Artwork' },
+        { src: '/assets/2.jpg', label: 'Pet Portrait', alt: 'Pet Portrait Artwork' },
+        { src: '/assets/3.jpg', label: 'Memorial Art', alt: 'Memorial Portrait Artwork' }
+    ];
+
     return (
         <>
             <section className="hero">
-                <div className="hero-l">
-                    <div className="hero-eyebrow">Hyderabad Fine Art Studio</div>
-                    <h1 className="hero-title">
-                        Every Face<br />Tells a <em>Story.</em><br />We Paint It.
-                    </h1>
-                    <p className="hero-sub">
-                        Museum-quality portraits, spiritual paintings, and custom artworks — created from emotion, crafted with obsessive precision.
-                    </p>
-                    <div className="hero-btns">
-                        <Link href="#gallery" className="btn-primary">
-                            <i className="bi bi-grid-3x3-gap"></i> View Gallery
-                        </Link>
-                        <a href="#" className="btn-secondary">
-                            <div className="play-icon"><i className="bi bi-play-fill"></i></div>
-                            See Process
-                        </a>
+                <div className="hero-container">
+                    <div className="hero-content">
+                        <div className="hero-eyebrow">Vivek Artline</div>
+                        <h1 className="hero-title">
+                            Where <em>Memories</em> Take Shape
+                        </h1>
+                        <p className="hero-tagline">
+                            Hand-Drawn Portraits That Preserve Your Most Precious Memories
+                        </p>
+                        <p className="hero-subtitle">
+                            Custom Pencil Portraits • Couple Sketches • Pet Portraits • Memorial Artworks
+                        </p>
+                        <div className="hero-buttons">
+                            <a
+                                href={CONTACT.whatsappLink()}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-primary"
+                            >
+                                <i className="bi bi-whatsapp"></i> Order Custom Portrait
+                            </a>
+                            <Link href="#gallery" className="btn-secondary">
+                                View Portfolio
+                                <span className="play-icon">
+                                    <i className="bi bi-arrow-right"></i>
+                                </span>
+                            </Link>
+                        </div>
                     </div>
-                </div>
 
-                <div className="hero-r">
-                    <div className="pol-stack" id="polStack">
-                        {['Portrait Study', 'Glass Engraving', 'Spiritual Art'].map((label, i) => (
-                            <div className="pol" key={i}>
-                                <div className="art">
-                                    <Image src={`/assets/${i + 1}.jpg`} alt={label} width={300} height={400} />
+                    <div className="hero-visual">
+                        <div className="polaroid-stack" id="polStack">
+                            {polaroids.map((polaroid, index) => (
+                                <div className="polaroid" key={index}>
+                                    <div className="polaroid-image">
+                                        <Image
+                                            src={polaroid.src}
+                                            alt={polaroid.alt}
+                                            width={300}
+                                            height={400}
+                                            priority={index === 0}
+                                        />
+                                    </div>
+                                    <div className="polaroid-label">{polaroid.label}</div>
                                 </div>
-                                <div className="pol-lbl">{label}</div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
 
-                <div className="scroll-hint"></div>
+                    <div className="scroll-hint" aria-hidden="true">Scroll</div>
+                </div>
             </section>
 
             <style jsx>{`
-                /* ── Hero ── */
                 .hero {
                     position: relative;
                     min-height: 100vh;
-                    display: grid;
-                    grid-template-columns: 1.1fr 0.9fr;
-                    overflow: hidden;
                     background: var(--parchment);
-                    max-width: var(--max-width);
-                    margin: 0 auto;
+                    overflow: hidden;
+                }
+
+                .hero::before,
+                .hero::after {
+                    content: '';
+                    position: absolute;
+                    border-radius: 50%;
+                    filter: blur(60px);
+                    pointer-events: none;
                 }
 
                 .hero::before {
-                    content: '';
-                    position: absolute;
                     top: -20%;
                     left: -10%;
                     width: 600px;
                     height: 600px;
                     background: radial-gradient(ellipse at center, rgba(125, 37, 53, 0.06) 0%, rgba(125, 37, 53, 0.03) 35%, transparent 70%);
-                    filter: blur(60px);
                     animation: float 20s ease-in-out infinite;
-                    pointer-events: none;
                 }
 
                 .hero::after {
-                    content: '';
-                    position: absolute;
                     bottom: -15%;
                     right: -8%;
                     width: 500px;
                     height: 500px;
                     background: radial-gradient(ellipse at center, rgba(184, 92, 42, 0.08) 0%, rgba(184, 92, 42, 0.04) 40%, transparent 75%);
-                    filter: blur(70px);
                     animation: float 25s ease-in-out infinite reverse;
-                    pointer-events: none;
                 }
 
-                .hero-l {
+                .hero-container {
+                    max-width: var(--max-width);
+                    margin: 0 auto;
+                    padding: 0 clamp(1.5rem, 5vw, 4rem);
+                    min-height: 100vh;
+                    display: grid;
+                    grid-template-columns: 1.1fr 0.9fr;
+                    align-items: center;
                     position: relative;
                     z-index: 2;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    padding: 10rem 3vw 6rem 10vw;
+                }
+
+                .hero-content {
+                    padding: 10rem 3vw 6rem 0;
                 }
 
                 .hero-eyebrow {
@@ -121,7 +148,7 @@ export default function Hero() {
                     font-family: 'Cormorant Garamond', serif;
                     font-size: clamp(3.25rem, 6vw, 6.5rem);
                     font-weight: 600;
-                    line-height: 0.95;
+                    line-height: 1.05;
                     color: var(--charcoal);
                     margin-bottom: var(--space-5);
                     opacity: 0;
@@ -135,27 +162,39 @@ export default function Hero() {
                     font-weight: 600;
                 }
 
-                .hero-sub {
+                .hero-tagline {
+                    font-family: 'Cormorant Garamond', serif;
+                    font-style: italic;
+                    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+                    font-weight: 500;
+                    color: var(--burgundy);
+                    margin-bottom: var(--space-4);
+                    letter-spacing: 0.01em;
+                    opacity: 0;
+                    animation: fadeUp 0.9s 0.55s ease forwards;
+                }
+
+                .hero-subtitle {
                     font-size: var(--text-base);
                     line-height: 1.8;
                     color: var(--text-secondary);
-                    max-width: 420px;
+                    max-width: 460px;
                     margin-bottom: var(--space-8);
                     font-weight: 400;
                     opacity: 0;
-                    animation: fadeUp 0.9s 0.6s ease forwards;
+                    animation: fadeUp 0.9s 0.68s ease forwards;
                 }
 
-                .hero-btns {
+                .hero-buttons {
                     display: flex;
                     align-items: center;
                     gap: 1.5rem;
                     flex-wrap: wrap;
                     opacity: 0;
-                    animation: fadeUp 0.9s 0.75s ease forwards;
+                    animation: fadeUp 0.9s 0.82s ease forwards;
                 }
 
-                .hero-btns :global(.btn-primary) {
+                .btn-primary {
                     background: var(--sienna);
                     color: var(--parchment);
                     font-size: var(--text-xs);
@@ -168,11 +207,12 @@ export default function Hero() {
                     align-items: center;
                     gap: 0.5rem;
                     transition: all 0.35s var(--ease-out);
-                    border-radius: 4px;
+                    border-radius: 50px;
                     box-shadow: 0 2px 8px rgba(184, 92, 42, 0.2);
+                    font-family: 'Jost', sans-serif;
                 }
 
-                .hero-btns :global(.btn-primary):hover {
+                .btn-primary:hover {
                     background: var(--burgundy);
                     transform: translateY(-2px);
                     box-shadow: 0 8px 24px rgba(125, 37, 53, 0.24);
@@ -181,34 +221,45 @@ export default function Hero() {
                 .btn-secondary {
                     display: inline-flex;
                     align-items: center;
-                    gap: 0.65rem;
+                    gap: 0.85rem;
                     font-size: var(--text-xs);
                     letter-spacing: 0.12em;
                     text-transform: uppercase;
-                    color: var(--text-secondary);
+                    color: var(--charcoal);
                     text-decoration: none;
-                    transition: color 0.3s;
-                    font-weight: 500;
+                    font-weight: 600;
+                    padding: 0.85rem 0.85rem 0.85rem 1.75rem;
+                    border: 1.5px solid var(--border-medium);
+                    border-radius: 50px;
+                    background: transparent;
+                    transition: all 0.35s var(--ease-out);
+                    font-family: 'Jost', sans-serif;
                 }
 
-                .btn-secondary:hover { color: var(--burgundy); }
+                .btn-secondary:hover {
+                    color: var(--burgundy);
+                    border-color: var(--burgundy);
+                    background: rgba(125, 37, 53, 0.04);
+                    box-shadow: 0 8px 24px rgba(125, 37, 53, 0.1);
+                }
 
                 .play-icon {
-                    width: 38px;
-                    height: 38px;
+                    width: 30px;
+                    height: 30px;
                     border-radius: 50%;
-                    border: 1.5px solid var(--border-medium);
+                    background: var(--burgundy);
+                    color: var(--parchment);
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    font-size: 0.75rem;
-                    color: var(--burgundy);
-                    transition: all 0.3s var(--ease-out);
+                    font-size: 0.7rem;
+                    flex-shrink: 0;
+                    transition: all 0.35s var(--ease-out);
                 }
 
                 .btn-secondary:hover .play-icon {
-                    background: rgba(125, 37, 53, 0.06);
-                    transform: scale(1.1);
+                    background: var(--sienna);
+                    transform: translateX(3px);
                 }
 
                 .scroll-hint {
@@ -235,17 +286,15 @@ export default function Hero() {
                     background: linear-gradient(to bottom, var(--border-medium), transparent);
                 }
 
-                /* ── Polaroid stack ── */
-                .hero-r {
+                .hero-visual {
                     position: relative;
-                    z-index: 2;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    padding: 6rem 6vw 6rem 2vw;
+                    padding: 6rem 0;
                 }
 
-                .pol-stack {
+                .polaroid-stack {
                     position: relative;
                     width: 420px;
                     height: 520px;
@@ -253,31 +302,30 @@ export default function Hero() {
                     animation: fadeIn 1s 0.9s ease forwards;
                 }
 
-                .pol {
+                .polaroid {
                     position: absolute;
                     width: 300px;
                     background: #FEFDFB;
                     padding: 14px 14px 50px;
-                    box-shadow: 0 12px 48px rgba(28, 24, 20, 0.1),
-                                0 2px 8px rgba(28, 24, 20, 0.06);
+                    box-shadow: 0 12px 48px rgba(28, 24, 20, 0.1), 0 2px 8px rgba(28, 24, 20, 0.06);
                     transition: transform 0.7s var(--ease-out);
                     border: 1px solid rgba(28, 24, 20, 0.04);
                 }
 
-                .pol .art {
+                .polaroid-image {
                     width: 100%;
                     aspect-ratio: 3/4;
                     overflow: hidden;
                     background: var(--linen);
                 }
 
-                .pol .art :global(img) {
+                .polaroid-image :global(img) {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
                 }
 
-                .pol .pol-lbl {
+                .polaroid-label {
                     font-family: 'Cormorant Garamond', serif;
                     font-size: 0.9rem;
                     font-style: italic;
@@ -286,95 +334,140 @@ export default function Hero() {
                     margin-top: 0.625rem;
                 }
 
-                .pol:nth-child(1) {
+                .polaroid:nth-child(1) {
                     transform: rotate(-8deg) translate(-70px, 35px);
                     z-index: 1;
                 }
-                .pol:nth-child(2) {
+                
+                .polaroid:nth-child(2) {
                     transform: rotate(5deg) translate(70px, -35px);
                     z-index: 2;
                 }
-                .pol:nth-child(3) {
+                
+                .polaroid:nth-child(3) {
                     transform: rotate(-1.5deg) translate(0, 0);
                     z-index: 3;
                 }
 
-                .pol:hover {
+                .polaroid:hover {
                     transform: rotate(0deg) translate(0, -16px) scale(1.05) !important;
                     z-index: 10;
                     box-shadow: 0 24px 64px rgba(28, 24, 20, 0.16);
                 }
 
-                /* ── Responsive ── */
-
                 @media (max-width: 1100px) {
-                    .pol-stack { width: 360px; height: 460px; }
-                    .pol { width: 260px; }
-                    .pol:nth-child(1) { transform: rotate(-8deg) translate(-60px, 30px); }
-                    .pol:nth-child(2) { transform: rotate(5deg) translate(60px, -30px); }
+                    .polaroid-stack { 
+                        width: 360px; 
+                        height: 460px; 
+                    }
+                    
+                    .polaroid { 
+                        width: 260px; 
+                    }
+                    
+                    .polaroid:nth-child(1) { 
+                        transform: rotate(-8deg) translate(-60px, 30px); 
+                    }
+                    
+                    .polaroid:nth-child(2) { 
+                        transform: rotate(5deg) translate(60px, -30px); 
+                    }
                 }
 
                 @media (max-width: 900px) {
-                    .hero {
+                    .hero-container {
                         grid-template-columns: 1fr;
                         min-height: auto;
                     }
 
-                    /* Cards appear above text on mobile */
-                    .hero-r {
+                    .hero-visual {
                         order: -1;
                         min-height: 62vw;
-                        /*
-                         * KEY FIX: enough top padding so the tallest card
-                         * (which can translate -26px upward) clears the navbar (~64px).
-                         * 6rem ≈ 96px gives comfortable breathing room.
-                         */
-                        padding: 6.5rem 6vw 3rem;
+                        padding: 6.5rem 0 3rem;
                     }
 
-                    .hero-l {
-                        padding: 3.5rem 6vw 5rem;
+                    .hero-content {
+                        padding: 3.5rem 0 5rem;
                     }
 
-                    .scroll-hint { display: none; }
+                    .scroll-hint { 
+                        display: none; 
+                    }
 
-                    .pol-stack {
+                    .polaroid-stack {
                         width: 260px;
                         height: 340px;
                     }
-                    .pol {
+                    
+                    .polaroid {
                         width: 190px;
                         padding: 12px 12px 44px;
                     }
-                    /*
-                     * Tighten card translations on mobile so they stay
-                     * within the padded hero-r zone and never poke above
-                     * the navbar — translate values are proportionally reduced.
-                     */
-                    .pol:nth-child(1) { transform: rotate(-8deg) translate(-42px, 24px); }
-                    .pol:nth-child(2) { transform: rotate(5deg)  translate(42px, -20px); }
+                    
+                    .polaroid:nth-child(1) { 
+                        transform: rotate(-8deg) translate(-42px, 24px); 
+                    }
+                    
+                    .polaroid:nth-child(2) { 
+                        transform: rotate(5deg) translate(42px, -20px); 
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .hero-container {
+                        padding: 0 var(--space-section-x);
+                    }
                 }
 
                 @media (max-width: 600px) {
-                    .hero-title { font-size: 2.75rem; }
-                    .hero-l { padding: 3rem 5vw 4rem; }
-                    .hero-r {
-                        padding: 5.5rem 5vw 2.5rem;
+                    .hero-content { 
+                        padding: 3rem 0 4rem; 
+                    }
+                    
+                    .hero-visual {
+                        padding: 5.5rem 0 2.5rem;
                         min-height: 68vw;
                     }
-                    .pol-stack { width: 220px; height: 290px; }
-                    .pol { width: 165px; }
-                    .pol:nth-child(1) { transform: rotate(-8deg) translate(-36px, 20px); }
-                    .pol:nth-child(2) { transform: rotate(5deg)  translate(36px, -16px); }
+                    
+                    .polaroid-stack { 
+                        width: 220px; 
+                        height: 290px; 
+                    }
+                    
+                    .polaroid { 
+                        width: 165px; 
+                    }
+                    
+                    .polaroid:nth-child(1) { 
+                        transform: rotate(-8deg) translate(-36px, 20px); 
+                    }
+                    
+                    .polaroid:nth-child(2) { 
+                        transform: rotate(5deg) translate(36px, -16px); 
+                    }
                 }
 
                 @media (max-width: 400px) {
-                    .hero-title { font-size: 2.25rem; }
-                    .hero-r { padding: 5rem 5vw 2rem; }
-                    .pol-stack { width: 195px; height: 260px; }
-                    .pol { width: 150px; }
-                    .pol:nth-child(1) { transform: rotate(-7deg) translate(-30px, 18px); }
-                    .pol:nth-child(2) { transform: rotate(4deg)  translate(30px, -14px); }
+                    .hero-visual { 
+                        padding: 5rem 0 2rem; 
+                    }
+                    
+                    .polaroid-stack { 
+                        width: 195px; 
+                        height: 260px; 
+                    }
+                    
+                    .polaroid { 
+                        width: 150px; 
+                    }
+                    
+                    .polaroid:nth-child(1) { 
+                        transform: rotate(-7deg) translate(-30px, 18px); 
+                    }
+                    
+                    .polaroid:nth-child(2) { 
+                        transform: rotate(4deg) translate(30px, -14px); 
+                    }
                 }
             `}</style>
         </>

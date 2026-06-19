@@ -1,42 +1,62 @@
-//components/Emotion.tsx
-
+// components/Emotion.tsx
 'use client';
 
+import Container from './common/Container';
+
 export default function Emotion() {
+    const occasions = [
+        { icon: 'heart', label: 'Memorial Portraits' },
+        { icon: 'gift', label: 'Wedding Gifts' },
+        { icon: 'people', label: 'Couple Sketches' },
+        { icon: 'calendar-heart', label: 'Anniversary Art' }
+    ];
+
     return (
         <>
-            <section className="emotion-sec">
-                <div className="emotion-bg"></div>
-                <div className="emotion-content reveal">
-                    <div className="emotion-eyebrow">Crafted with Passion</div>
-                    <h2 className="emotion-title">
-                        More Than Art,<br />It's an <em>Emotion</em>.
-                    </h2>
-                    <a href="#" className="play-btn">
-                        <div className="play-circle">
-                            <i className="bi bi-play-fill"></i>
-                        </div>
-                        Watch the Journey
-                    </a>
-                </div>
+            <section className="emotion-section" aria-labelledby="emotion-heading">
+                <div className="emotion-bg" aria-hidden="true"></div>
+                <Container>
+                    <div className="emotion-content reveal">
+                        <span className="emotion-quote" aria-hidden="true">"</span>
+
+                        <p className="emotion-eyebrow">More Than A Portrait</p>
+
+                        <h2 id="emotion-heading" className="emotion-title">
+                            A Gift They'll<br /><em>Never Forget</em>
+                        </h2>
+
+                        <p className="emotion-desc">
+                            From birthdays and anniversaries to memorial tributes and wedding gifts —
+                            every portrait is handcrafted to preserve a moment forever.
+                        </p>
+
+                        <ul className="occasion-list">
+                            {occasions.map((occasion, index) => (
+                                <li key={index} className="occasion-item">
+                                    <i className={`bi bi-${occasion.icon}`} aria-hidden="true"></i>
+                                    <span>{occasion.label}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </Container>
             </section>
 
             <style jsx>{`
-                /*emotion*/
-                .emotion-sec {
+                .emotion-section {
                     position: relative;
-                    min-height: 65vh;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     background: var(--burgundy-deep);
                     overflow: hidden;
+                    padding: var(--space-section) 0;
                 }
 
                 .emotion-bg {
                     position: absolute;
                     inset: 0;
-                    background: radial-gradient(ellipse at 50% 40%, rgba(184, 92, 42, 0.08) 0%, transparent 60%);
+                    background: radial-gradient(ellipse at 50% 0%, rgba(184, 92, 42, 0.1) 0%, transparent 55%);
                 }
 
                 .emotion-content {
@@ -44,25 +64,51 @@ export default function Emotion() {
                     z-index: 2;
                     text-align: center;
                     max-width: 720px;
-                    padding: 0 max(6vw, calc((100% - var(--max-width)) / 2));
+                    margin: 0 auto;
+                }
+
+                .emotion-quote {
+                    position: absolute;
+                    top: -3.5rem;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 11rem;
+                    line-height: 1;
+                    color: var(--parchment);
+                    opacity: 0.05;
+                    pointer-events: none;
+                    user-select: none;
                 }
 
                 .emotion-eyebrow {
                     font-size: var(--text-xs);
-                    letter-spacing: 0.24em;
+                    letter-spacing: 0.22em;
                     text-transform: uppercase;
-                    color: rgba(240, 232, 220, 0.5);
-                    margin-bottom: var(--space-5);
-                    font-weight: 500;
+                    color: var(--sienna);
+                    font-weight: 600;
+                    margin-bottom: var(--space-4);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.65rem;
+                }
+
+                .emotion-eyebrow::before,
+                .emotion-eyebrow::after {
+                    content: '';
+                    width: 20px;
+                    height: 1px;
+                    background: rgba(240, 232, 220, 0.3);
                 }
 
                 .emotion-title {
                     font-family: 'Cormorant Garamond', serif;
-                    font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+                    font-size: clamp(2.25rem, 4.4vw, 3.5rem);
                     font-weight: 600;
-                    line-height: 1.15;
+                    line-height: 1.12;
                     color: var(--parchment);
-                    margin-bottom: var(--space-8);
+                    margin-bottom: var(--space-5);
                     letter-spacing: -0.01em;
                 }
 
@@ -71,50 +117,136 @@ export default function Emotion() {
                     color: var(--sienna);
                 }
 
-                .play-btn {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.9rem;
-                    font-size: var(--text-xs);
-                    letter-spacing: 0.16em;
-                    text-transform: uppercase;
-                    color: rgba(240, 232, 220, 0.6);
-                    text-decoration: none;
-                    transition: color 0.3s;
-                    font-weight: 500;
+                .emotion-desc {
+                    font-size: var(--text-base);
+                    line-height: 1.75;
+                    color: rgba(240, 232, 220, 0.82);
+                    margin: 0 auto var(--space-10);
+                    max-width: 480px;
                 }
 
-                .play-btn:hover {
-                    color: var(--parchment);
+                .occasion-list {
+                    display: flex;
+                    justify-content: center;
+                    align-items: stretch;
+                    list-style: none;
+                    flex-wrap: wrap;
                 }
 
-                .play-circle {
-                    width: 64px;
-                    height: 64px;
-                    border-radius: 50%;
-                    border: 2px solid rgba(240, 232, 220, 0.2);
+                .occasion-item {
                     display: flex;
                     align-items: center;
-                    justify-content: center;
-                    font-size: 1rem;
-                    color: rgba(240, 232, 220, 0.7);
+                    gap: 0.55rem;
+                    font-size: var(--text-sm);
+                    color: rgba(240, 232, 220, 0.68);
+                    padding: 0 var(--space-6);
                     position: relative;
-                    transition: all 0.4s var(--ease-out);
+                    transition: color 0.3s;
+                    letter-spacing: 0.01em;
                 }
 
-                .play-circle::before {
+                .occasion-item:not(:last-child)::after {
                     content: '';
                     position: absolute;
-                    inset: -10px;
-                    border-radius: 50%;
-                    border: 1px solid rgba(184, 92, 42, 0.15);
-                    animation: pulse 2.8s ease-out infinite;
+                    right: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 1px;
+                    height: 14px;
+                    background: rgba(240, 232, 220, 0.18);
                 }
 
-                .play-btn:hover .play-circle {
-                    background: rgba(240, 232, 220, 0.08);
-                    border-color: rgba(240, 232, 220, 0.4);
-                    transform: scale(1.08);
+                .occasion-item:first-child { 
+                    padding-left: 0; 
+                }
+                
+                .occasion-item:last-child { 
+                    padding-right: 0; 
+                }
+
+                .occasion-item i {
+                    font-size: 0.95rem;
+                    color: var(--sienna);
+                }
+
+                .occasion-item:hover { 
+                    color: var(--parchment); 
+                }
+                
+                .occasion-item:hover i { 
+                    color: #D9844A; 
+                }
+
+                @media (max-width: 768px) {
+                    .emotion-section {
+                        padding: var(--space-section-mobile) 0;
+                    }
+                }
+
+                @media (max-width: 700px) {
+                    .emotion-quote {
+                        font-size: 6rem;
+                        top: -1.75rem;
+                        opacity: 0.04;
+                    }
+
+                    .emotion-eyebrow {
+                        margin-bottom: var(--space-3);
+                        font-size: 0.625rem;
+                    }
+
+                    .emotion-title {
+                        margin-bottom: var(--space-4);
+                    }
+
+                    .emotion-desc {
+                        margin-bottom: var(--space-6);
+                        font-size: var(--text-sm);
+                        line-height: 1.7;
+                    }
+
+                    .occasion-list {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: var(--space-3);
+                        justify-items: stretch;
+                    }
+
+                    .occasion-item {
+                        justify-content: center;
+                        gap: var(--space-2);
+                        padding: var(--space-3) var(--space-2);
+                        background: rgba(240, 232, 220, 0.05);
+                        border: 1px solid rgba(240, 232, 220, 0.12);
+                        border-radius: 12px;
+                        min-height: 44px;
+                    }
+
+                    .occasion-item:first-child,
+                    .occasion-item:last-child {
+                        padding: var(--space-3) var(--space-2);
+                    }
+
+                    .occasion-item::after {
+                        display: none;
+                    }
+
+                    .occasion-item i {
+                        font-size: 1.05rem;
+                        flex-shrink: 0;
+                    }
+
+                    .occasion-item span {
+                        font-size: var(--text-xs);
+                        line-height: 1.3;
+                        text-align: center;
+                    }
+                }
+
+                @media (max-width: 380px) {
+                    .emotion-quote {
+                        display: none;
+                    }
                 }
             `}</style>
         </>

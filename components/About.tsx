@@ -1,64 +1,83 @@
-//components/About.tsx
-
+// components/About.tsx
 'use client';
 
 import Link from 'next/link';
+import Container from './common/Container';
+import SectionHeader from './common/SectionHeader';
+import Button from './common/Button';
 
 export default function About() {
     const badges = [
-        '500+ Artworks Delivered',
+        '500+ Portraits Delivered',
         '7–10 Day Turnaround',
         'Pan-India Shipping',
         '100% Handcrafted'
     ];
 
+    const portraitTypes = [
+        'Couple Portraits',
+        'Family Portraits',
+        'Pet Portraits',
+        'Memorial Portraits',
+        'Wedding Gifts',
+        'Custom Requests'
+    ];
+
     return (
         <>
-            <div className="about-wrap" id="about">
-                <div className="about-sec">
-                    <div className="about-visual reveal-l">
-                        <div className="av-main">
-                            <div className="av-main-img"></div>
-                        </div>
-                        <div className="av-tag">The Artist</div>
-                    </div>
-
-                    <div className="about-txt reveal-r">
-                        <div className="eyebrow">About the Studio</div>
-                        <h2 className="sec-title">
-                            Art Created from<br />the <em>Heart</em>
-                        </h2>
-                        <p className="desc">
-                            Vivek is a Hyderabad-based fine artist specializing in hyper-realistic pencil portraits,
-                            spiritual paintings, glass engravings, and custom artworks. Every piece is made with
-                            archival-grade materials and meticulous attention to detail.
-                        </p>
-                        <p className="desc">
-                            From anniversary gifts to memorial portraits to home centrepieces, Vivek Artline creates
-                            art that families treasure for generations. Each work is one-of-a-kind, never replicated.
-                        </p>
-
-                        <div className="badges">
-                            {badges.map((badge, index) => (
-                                <span key={index} className="badge-item">{badge}</span>
-                            ))}
+            <section className="about-section" id="about">
+                <Container>
+                    <div className="about-grid">
+                        <div className="about-visual reveal-l">
+                            <div className="av-main">
+                                <div className="av-main-img"></div>
+                            </div>
+                            <div className="av-tag">Vivek</div>
                         </div>
 
-                        <Link href="#contact" className="btn-primary">
-                            Commission Your Art <i className="bi bi-arrow-right"></i>
-                        </Link>
+                        <div className="about-content reveal-r">
+                            <SectionHeader
+                                eyebrow="About Vivek"
+                                title="Handmade Portraits, "
+                                titleEm="Made with Heart"
+                            />
+
+                            <p className="desc">
+                                Vivek is a Hyderabad-based portrait artist specializing in hand-drawn pencil portraits.
+                                Every portrait is created with archival-grade materials and meticulous attention to detail.
+                            </p>
+                            <p className="desc">
+                                From couple sketches and family portraits to pet art and memorial tributes, Vivek transforms
+                                your cherished memories into heirloom-quality artwork — treasured for generations.
+                            </p>
+
+                            <div className="portrait-types">
+                                {portraitTypes.map((type, index) => (
+                                    <div key={index} className="pt-item">✓ {type}</div>
+                                ))}
+                            </div>
+
+                            <div className="badges">
+                                {badges.map((badge, index) => (
+                                    <span key={index} className="badge-item">{badge}</span>
+                                ))}
+                            </div>
+
+                            <Button href="#contact" variant="primary" icon="arrow-right">
+                                Order Your Portrait
+                            </Button>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </Container>
+            </section>
 
             <style jsx>{`
-                /*about*/
-                .about-wrap {
-                    padding: var(--space-16) max(8vw, calc((100% - var(--max-width)) / 2)) var(--space-12);
+                .about-section {
+                    padding: var(--space-section) 0;
                     background: var(--linen);
                 }
 
-                .about-sec {
+                .about-grid {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: var(--space-10);
@@ -83,7 +102,6 @@ export default function About() {
                 .av-main-img {
                     width: 100%;
                     height: 100%;
-                    display: block;
                     background: linear-gradient(155deg, #EDD5C8 0%, #D9B5A0 25%, #C49780 55%, #A87B68 75%, #8B6856 100%);
                 }
 
@@ -103,12 +121,29 @@ export default function About() {
                     box-shadow: 0 4px 16px rgba(28, 24, 20, 0.06);
                 }
 
-                .about-txt .desc {
+                .about-content :global(.section-header) {
+                    margin-bottom: var(--space-5);
+                }
+
+                .desc {
                     font-size: var(--text-base);
                     line-height: 1.85;
                     color: var(--text-secondary);
                     margin-bottom: var(--space-4);
                     font-weight: 400;
+                }
+
+                .portrait-types {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 0.625rem;
+                    margin: var(--space-6) 0;
+                }
+
+                .pt-item {
+                    font-size: var(--text-sm);
+                    color: var(--text-primary);
+                    font-weight: 500;
                 }
 
                 .badges {
@@ -138,41 +173,29 @@ export default function About() {
                     top: 0.35rem;
                 }
 
-                .about-txt :global(.btn-primary) {
-                    background: var(--sienna);
-                    color: var(--parchment);
-                    font-size: var(--text-xs);
-                    letter-spacing: 0.12em;
-                    text-transform: uppercase;
-                    padding: 0.9rem 2rem;
-                    text-decoration: none;
-                    font-weight: 600;
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    transition: all 0.35s var(--ease-out);
-                    border-radius: 4px;
-                    box-shadow: 0 2px 8px rgba(184, 92, 42, 0.2);
-                }
-
-                .about-txt :global(.btn-primary):hover {
-                    background: var(--burgundy);
-                    transform: translateY(-2px);
-                    box-shadow: 0 8px 24px rgba(125, 37, 53, 0.24);
-                }
-
-                /*responsive*/
-                @media(max-width:900px) {
-                    .about-sec {
+                @media(max-width: 900px) {
+                    .about-grid {
                         grid-template-columns: 1fr;
                         gap: var(--space-8);
                     }
+                    
                     .about-visual {
                         height: 380px;
                     }
+                    
                     .av-main {
                         right: 60px;
                         bottom: 70px;
+                    }
+                    
+                    .portrait-types {
+                        grid-template-columns: 1fr;
+                    }
+                }
+
+                @media(max-width: 768px) {
+                    .about-section {
+                        padding: var(--space-section-mobile) 0;
                     }
                 }
             `}</style>

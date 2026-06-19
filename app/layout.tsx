@@ -1,21 +1,43 @@
-//app/layout.tsx
-
+// app/layout.tsx
 import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Vivek Artline — Fine Art Portrait Studio, Hyderabad',
-  description: 'Museum-quality portraits and custom artworks',
+  title: 'Vivek Artline — Custom Portrait Artist, Hyderabad',
+  description: 'Hand-drawn pencil portraits for couples, families, pets, and memorial tributes. Preserving memories through custom artwork.',
+  keywords: 'portrait artist, pencil portraits, custom artwork, Hyderabad, couple portraits, pet portraits',
+  openGraph: {
+    title: 'Vivek Artline — Custom Portrait Artist',
+    description: 'Hand-drawn pencil portraits preserving your cherished memories',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+        />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Jost:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }

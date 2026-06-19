@@ -1,68 +1,61 @@
-//components/Testimonials.tsx
-
+// components/Testimonials.tsx
 'use client';
 
+import Container from './common/Container';
+import SectionHeader from './common/SectionHeader';
 import { testimonials } from '@/data/testimonials';
 
 export default function Testimonials() {
     return (
         <>
-            <section className="testi-sec" id="testimonials">
-                <div className="t-header reveal">
-                    <div className="eyebrow">Client Stories</div>
-                    <h2 className="sec-title">
-                        Words from <em>Happy Collectors</em>
-                    </h2>
-                </div>
+            <section className="testimonials-section" id="testimonials">
+                <Container>
+                    <SectionHeader
+                        eyebrow="Client Stories"
+                        title="Words from "
+                        titleEm="Happy Collectors"
+                        centered
+                    />
 
-                <div className="t-grid reveal">
-                    {testimonials.map((testimonial) => (
-                        <div key={testimonial.id} className="t-card">
-                            <div className="t-q">"</div>
-                            <div className="t-stars">
-                                {'★'.repeat(testimonial.rating)}
-                            </div>
-                            <p className="t-text">{testimonial.text}</p>
-                            <div className="t-auth">
-                                <div className="t-av">{testimonial.initial}</div>
-                                <div>
-                                    <div className="t-name">{testimonial.name}</div>
-                                    <div className="t-loc">{testimonial.location}</div>
+                    <div className="testimonials-grid">
+                        {testimonials.map((testimonial, index) => (
+                            <div
+                                key={testimonial.id}
+                                className="testimonial-card reveal"
+                                style={{ animationDelay: `${index * 0.1}s` }}
+                            >
+                                <div className="quote-mark">"</div>
+                                <div className="stars">
+                                    {'★'.repeat(testimonial.rating)}
+                                </div>
+                                <p className="testimonial-text">{testimonial.text}</p>
+                                <div className="testimonial-author">
+                                    <div className="author-avatar">{testimonial.initial}</div>
+                                    <div className="author-info">
+                                        <div className="author-name">{testimonial.name}</div>
+                                        <div className="author-location">{testimonial.location}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                </Container>
             </section>
 
             <style jsx>{`
-                /*testimonials*/
-                .testi-sec {
-                    padding: var(--space-12) max(8vw, calc((100% - var(--max-width)) / 2)) var(--space-16);
+                .testimonials-section {
+                    padding: var(--space-section) 0;
                     background: var(--parchment);
                 }
 
-                .t-header {
-                    text-align: center;
-                    max-width: 580px;
-                    margin: 0 auto var(--space-10);
-                }
-
-                .t-header .eyebrow {
-                    justify-content: center;
-                }
-
-                .t-header .eyebrow::before {
-                    display: none;
-                }
-
-                .t-grid {
+                .testimonials-grid {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
                     gap: 1.5rem;
+                    margin-top: var(--space-8);
                 }
 
-                .t-card {
+                .testimonial-card {
                     padding: var(--space-8) var(--space-6);
                     background: var(--parchment);
                     border: 1px solid var(--border-subtle);
@@ -71,13 +64,13 @@ export default function Testimonials() {
                     border-radius: 2px;
                 }
 
-                .t-card:hover {
+                .testimonial-card:hover {
                     background: var(--linen);
                     transform: translateY(-4px);
                     box-shadow: 0 12px 40px rgba(28, 24, 20, 0.08);
                 }
 
-                .t-q {
+                .quote-mark {
                     font-family: 'Cormorant Garamond', serif;
                     font-size: 5rem;
                     color: rgba(125, 37, 53, 0.08);
@@ -85,16 +78,17 @@ export default function Testimonials() {
                     top: 0.5rem;
                     left: 1.5rem;
                     line-height: 1;
+                    user-select: none;
                 }
 
-                .t-stars {
+                .stars {
                     color: var(--sienna);
                     font-size: 0.875rem;
                     margin-bottom: var(--space-3);
                     letter-spacing: 0.05em;
                 }
 
-                .t-text {
+                .testimonial-text {
                     font-size: var(--text-sm);
                     line-height: 1.8;
                     color: var(--text-secondary);
@@ -103,13 +97,13 @@ export default function Testimonials() {
                     font-weight: 400;
                 }
 
-                .t-auth {
+                .testimonial-author {
                     display: flex;
                     align-items: center;
                     gap: 0.85rem;
                 }
 
-                .t-av {
+                .author-avatar {
                     width: 38px;
                     height: 38px;
                     border-radius: 50%;
@@ -125,29 +119,38 @@ export default function Testimonials() {
                     background: var(--linen);
                 }
 
-                .t-name {
+                .author-name {
                     font-size: var(--text-sm);
                     color: var(--text-primary);
                     font-weight: 500;
                 }
 
-                .t-loc {
+                .author-location {
                     font-size: 0.7rem;
                     color: var(--text-tertiary);
                     margin-top: 0.125rem;
                 }
 
-                /*responsive*/
-                @media(max-width:900px) {
-                    .t-grid {
+                @media(max-width: 900px) {
+                    .testimonials-grid {
                         grid-template-columns: 1fr 1fr;
                         gap: 1.25rem;
                     }
                 }
 
-                @media(max-width:600px) {
-                    .t-grid {
+                @media(max-width: 768px) {
+                    .testimonials-section {
+                        padding: var(--space-section-mobile) 0;
+                    }
+                }
+
+                @media(max-width: 600px) {
+                    .testimonials-grid {
                         grid-template-columns: 1fr;
+                    }
+
+                    .testimonial-card {
+                        padding: var(--space-6) var(--space-5);
                     }
                 }
             `}</style>

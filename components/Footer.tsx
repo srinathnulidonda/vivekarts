@@ -1,9 +1,11 @@
-//components/Footer.tsx
-
+// components/Footer.tsx
 'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import Container from './common/Container';
+import { CONTACT } from '@/lib/constants';
 
 interface AccordionItem {
     title: string;
@@ -19,185 +21,227 @@ export default function Footer() {
 
     const footerLinks: AccordionItem[] = [
         {
-            title: 'Links',
+            title: 'Quick Links',
             links: [
                 { label: 'Home', href: '#' },
-                { label: 'Gallery', href: '#gallery' },
-                { label: 'About', href: '#about' },
-                { label: 'Commission', href: '#contact' }
+                { label: 'Portrait Gallery', href: '#gallery' },
+                { label: 'About Vivek', href: '#about' },
+                { label: 'Order Portrait', href: '#contact' }
             ]
         },
         {
-            title: 'Information',
+            title: 'Portrait Types',
             links: [
-                { label: 'Shipping & Delivery', href: '#' },
-                { label: 'Custom Orders', href: '#' },
-                { label: 'FAQs', href: '#' },
-                { label: 'Care Guide', href: '#' }
+                { label: 'Couple Portraits', href: '#gallery' },
+                { label: 'Family Portraits', href: '#gallery' },
+                { label: 'Pet Portraits', href: '#gallery' },
+                { label: 'Memorial Portraits', href: '#gallery' },
+                { label: 'Wedding Gifts', href: '#gallery' }
             ]
         },
         {
-            title: 'Contact',
+            title: 'Get in Touch',
             links: [
-                { label: 'info@vivekartline.com', href: 'mailto:info@vivekartline.com' },
-                { label: '+91 12345 67890', href: 'tel:+911234567890' },
-                { label: 'Hyderabad, Telangana', href: '#' }
+                { label: CONTACT.email, href: `mailto:${CONTACT.email}` },
+                { label: CONTACT.phone, href: `tel:${CONTACT.phone}` },
+                { label: 'WhatsApp Enquiry', href: `https://wa.me/${CONTACT.whatsapp}` },
+                { label: CONTACT.location, href: '#' }
             ]
         }
     ];
 
     const socialLinks = [
-        { icon: 'bi-instagram', href: 'https://instagram.com/vivek_artline' },
-        { icon: 'bi-facebook', href: '#' },
-        { icon: 'bi-youtube', href: '#' },
-        { icon: 'bi-pinterest', href: '#' }
+        { icon: 'bi-instagram', href: CONTACT.instagramUrl, label: 'Instagram' },
+        { icon: 'bi-facebook', href: '#', label: 'Facebook' },
+        { icon: 'bi-youtube', href: '#', label: 'YouTube' },
+        { icon: 'bi-pinterest', href: '#', label: 'Pinterest' }
     ];
 
     return (
         <>
-            <footer>
-                <div className="ft-grid">
-                    <div className="ft-brand">
-                        <Link href="#" className="ft-logo">
-                            Vivek <em>Artline</em>
+            <footer className="footer">
+                <Container>
+                    {/* Desktop Layout */}
+                    <div className="footer-grid">
+                        <div className="footer-brand">
+                            <Link href="#" className="footer-logo">
+                                <Image
+                                    src="/logo.png"
+                                    alt="Vivek Artline"
+                                    width={200}
+                                    height={70}
+                                    className="footer-logo-image"
+                                    style={{ width: 'auto', height: '60px' }}
+                                />
+                            </Link>
+                            <p className="footer-desc">
+                                Custom portrait artist in Hyderabad specializing in hand-drawn pencil portraits.
+                                From couple sketches to memorial tributes — preserving your cherished memories forever.
+                            </p>
+                            <div className="footer-social">
+                                {socialLinks.map((social, index) => (
+                                    <a
+                                        key={index}
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="social-link"
+                                        aria-label={social.label}
+                                    >
+                                        <i className={`bi ${social.icon}`}></i>
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+
+                        {footerLinks.map((section) => (
+                            <div key={section.title} className="footer-column">
+                                <h4 className="footer-heading">{section.title}</h4>
+                                <ul className="footer-list">
+                                    {section.links.map((link, index) => (
+                                        <li key={index}>
+                                            <a href={link.href}>{link.label}</a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Mobile Layout */}
+                    <div className="footer-mobile">
+                        <Link href="#" className="footer-logo">
+                            <Image
+                                src="/logo.png"
+                                alt="Vivek Artline"
+                                width={160}
+                                height={55}
+                                className="footer-logo-image"
+                                style={{ width: 'auto', height: '50px' }}
+                            />
                         </Link>
-                        <p className="ft-desc">
-                            A Hyderabad-based fine art studio creating museum-quality portraits, spiritual
-                            paintings, and custom artworks treasured for generations.
+                        <p className="footer-desc">
+                            Custom portrait artist in Hyderabad specializing in hand-drawn pencil portraits.
+                            Preserving your cherished memories forever.
                         </p>
-                        <div className="ft-soc">
+                        <div className="footer-social">
                             {socialLinks.map((social, index) => (
-                                <a key={index} href={social.href} target="_blank" className="ft-s">
+                                <a
+                                    key={index}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="social-link"
+                                    aria-label={social.label}
+                                >
                                     <i className={`bi ${social.icon}`}></i>
                                 </a>
                             ))}
                         </div>
                     </div>
 
-                    {footerLinks.map((section) => (
-                        <div key={section.title} className="ft-col">
-                            <h4>{section.title}</h4>
-                            <ul>
-                                {section.links.map((link, index) => (
-                                    <li key={index}>
-                                        <a href={link.href}>{link.label}</a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="ft-mob-only">
-                    <Link href="#" className="ft-logo">
-                        Vivek <em>Artline</em>
-                    </Link>
-                    <p className="ft-desc">
-                        A Hyderabad-based fine art studio creating museum-quality portraits and custom artworks.
-                    </p>
-                    <div className="ft-soc">
-                        {socialLinks.map((social, index) => (
-                            <a key={index} href={social.href} target="_blank" className="ft-s">
-                                <i className={`bi ${social.icon}`}></i>
-                            </a>
+                    {/* Mobile Accordion */}
+                    <div className="footer-accordion">
+                        {footerLinks.map((section) => (
+                            <div key={section.title} className="accordion-item">
+                                <button
+                                    className={`accordion-button ${openAccordion === section.title ? 'open' : ''}`}
+                                    onClick={() => toggleAccordion(section.title)}
+                                    aria-expanded={openAccordion === section.title}
+                                >
+                                    {section.title}
+                                    <i className="bi bi-plus"></i>
+                                </button>
+                                <div className={`accordion-body ${openAccordion === section.title ? 'open' : ''}`}>
+                                    <ul className="footer-list">
+                                        {section.links.map((link, index) => (
+                                            <li key={index}>
+                                                <a href={link.href}>{link.label}</a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
                         ))}
                     </div>
-                </div>
 
-                {footerLinks.map((section) => (
-                    <div key={section.title} className="ft-acc-item">
-                        <button
-                            className={`ft-acc-btn ${openAccordion === section.title ? 'open' : ''}`}
-                            onClick={() => toggleAccordion(section.title)}
-                        >
-                            {section.title} <i className="bi bi-plus"></i>
-                        </button>
-                        <div className={`ft-acc-body ${openAccordion === section.title ? 'open' : ''}`}>
-                            <ul>
-                                {section.links.map((link, index) => (
-                                    <li key={index}>
-                                        <a href={link.href}>{link.label}</a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                    {/* Bottom Bar */}
+                    <div className="footer-bottom">
+                        <span>© 2025 Vivek Artline — Custom Portrait Artist, Hyderabad</span>
+                        <span>
+                            Handcrafted with <i className="bi bi-heart-fill"></i> for preserving memories
+                        </span>
                     </div>
-                ))}
-
-                <div className="ft-bot">
-                    <span>© 2025 Vivek Artline. All rights reserved.</span>
-                    <span>
-                        Designed with <i className="bi bi-heart-fill"></i> for art lovers
-                    </span>
-                </div>
+                </Container>
             </footer>
 
             <style jsx>{`
-                /*footer*/
-                footer {
+                .footer {
                     background: var(--parchment);
                     border-top: 1px solid var(--border-subtle);
-                    padding: var(--space-12) max(8vw, calc((100% - var(--max-width)) / 2)) var(--space-6);
+                    padding: var(--space-12) 0 var(--space-6);
                 }
 
-                .ft-grid {
+                /* Desktop Grid */
+                .footer-grid {
                     display: grid;
                     grid-template-columns: 2fr 1fr 1fr 1fr;
                     gap: var(--space-10);
                     margin-bottom: var(--space-8);
                 }
 
-                .ft-brand :global(.ft-logo) {
-                    font-family: 'Cormorant Garamond', serif;
-                    font-size: 1.875rem;
-                    font-weight: 600;
-                    color: var(--charcoal);
+                .footer-logo {
                     display: block;
-                    margin-bottom: var(--space-3);
-                    text-decoration: none;
-                    letter-spacing: -0.01em;
+                    margin-bottom: var(--space-5);
+                    transition: opacity 0.3s;
                 }
 
-                :global(.ft-logo) em {
-                    color: var(--burgundy);
-                    font-style: italic;
+                .footer-logo:hover {
+                    opacity: 0.8;
                 }
 
-                .ft-desc {
+                .footer-logo :global(.footer-logo-image) {
+                    display: block;
+                    object-fit: contain;
+                    max-width: 220px;
+                }
+
+                .footer-desc {
                     font-size: var(--text-sm);
                     color: var(--text-secondary);
-                    line-height: 1.7;
-                    margin-bottom: var(--space-4);
-                    max-width: 280px;
+                    line-height: 1.75;
+                    margin-bottom: var(--space-5);
+                    max-width: 320px;
                 }
 
-                .ft-soc {
+                .footer-social {
                     display: flex;
                     gap: 0.5rem;
                 }
 
-                .ft-s {
-                    width: 34px;
-                    height: 34px;
+                .social-link {
+                    width: 36px;
+                    height: 36px;
                     border: 1.5px solid var(--border-subtle);
-                    border-radius: 4px;
+                    border-radius: 6px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     color: var(--text-secondary);
-                    font-size: 0.875rem;
+                    font-size: 0.9375rem;
                     text-decoration: none;
                     transition: all 0.3s var(--ease-out);
                 }
 
-                .ft-s:hover {
+                .social-link:hover {
                     background: var(--burgundy);
                     color: var(--parchment);
                     border-color: var(--burgundy);
-                    transform: translateY(-2px);
+                    transform: translateY(-3px);
+                    box-shadow: 0 4px 12px rgba(125, 37, 53, 0.2);
                 }
 
-                .ft-col h4 {
+                .footer-heading {
                     font-size: 0.625rem;
                     letter-spacing: 0.16em;
                     text-transform: uppercase;
@@ -206,27 +250,35 @@ export default function Footer() {
                     font-weight: 700;
                 }
 
-                .ft-col ul {
+                .footer-list {
                     list-style: none;
                 }
 
-                .ft-col li {
+                .footer-list li {
                     margin-bottom: var(--space-3);
                 }
 
-                .ft-col a {
+                .footer-list a {
                     font-size: var(--text-sm);
                     color: var(--text-secondary);
                     text-decoration: none;
-                    transition: color 0.3s;
+                    transition: color 0.3s, transform 0.3s;
                     font-weight: 400;
+                    display: inline-block;
                 }
 
-                .ft-col a:hover {
+                .footer-list a:hover {
                     color: var(--burgundy);
+                    transform: translateX(2px);
                 }
 
-                .ft-bot {
+                /* Mobile Layout */
+                .footer-mobile,
+                .footer-accordion {
+                    display: none;
+                }
+
+                .footer-bottom {
                     border-top: 1px solid var(--border-subtle);
                     padding-top: var(--space-5);
                     display: flex;
@@ -235,22 +287,16 @@ export default function Footer() {
                     font-size: var(--text-xs);
                     color: var(--text-tertiary);
                     flex-wrap: wrap;
-                    gap: var(--space-3);
+                    gap: var(--space-4);
                 }
 
-                .ft-bot :global(i) {
+                .footer-bottom i {
                     color: var(--burgundy);
+                    font-size: 0.625rem;
                 }
 
-                .ft-mob-only {
-                    display: none;
-                }
-
-                .ft-acc-item {
-                    display: none;
-                }
-
-                .ft-acc-btn {
+                /* Accordion Styles */
+                .accordion-button {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
@@ -267,79 +313,97 @@ export default function Footer() {
                     width: 100%;
                     cursor: pointer;
                     font-weight: 600;
+                    font-family: 'Jost', sans-serif;
                 }
 
-                .ft-acc-btn :global(i) {
+                .accordion-button i {
                     color: var(--burgundy);
                     transition: transform 0.3s;
+                    font-size: 0.875rem;
                 }
 
-                .ft-acc-btn.open :global(i) {
+                .accordion-button.open i {
                     transform: rotate(45deg);
                 }
 
-                .ft-acc-body {
+                .accordion-body {
                     display: none;
-                    padding: var(--space-3) 0 var(--space-2);
+                    padding: var(--space-4) 0 var(--space-3);
                 }
 
-                .ft-acc-body.open {
+                .accordion-body.open {
                     display: block;
+                    animation: slideDown 0.3s ease;
                 }
 
-                .ft-acc-body li {
-                    margin-bottom: var(--space-2);
+                @keyframes slideDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-8px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
                 }
 
-                .ft-acc-body a {
-                    font-size: var(--text-sm);
-                    color: var(--text-secondary);
-                    text-decoration: none;
-                    font-weight: 400;
-                }
-
-                /*responsive*/
-                @media(max-width:1100px) {
-                    .ft-grid {
-                        grid-template-columns: 1fr 1fr;
+                /* Responsive */
+                @media(max-width: 1100px) {
+                    .footer-grid {
+                        grid-template-columns: 1.5fr 1fr 1fr;
                         gap: var(--space-8);
                     }
+                    
+                    .footer-grid .footer-column:first-of-type {
+                        grid-column: 1 / -1;
+                    }
                 }
 
-                @media(max-width:900px) {
-                    footer {
-                        padding: var(--space-10) 6vw var(--space-5);
+                @media(max-width: 900px) {
+                    .footer {
+                        padding: var(--space-10) 0 var(--space-5);
                     }
-                    .ft-grid {
+                    
+                    .footer-grid {
                         display: none;
                     }
-                    .ft-mob-only {
+                    
+                    .footer-mobile {
                         display: block;
-                    }
-                    .ft-mob-only :global(.ft-logo) {
-                        font-family: 'Cormorant Garamond', serif;
-                        font-size: 1.75rem;
-                        font-weight: 600;
-                        color: var(--charcoal);
-                        text-decoration: none;
-                        display: block;
-                        margin-bottom: var(--space-4);
-                    }
-                    .ft-mob-only .ft-desc {
-                        margin-bottom: var(--space-5);
-                    }
-                    .ft-mob-only .ft-soc {
                         margin-bottom: var(--space-6);
                     }
-                    .ft-acc-item {
+
+                    .footer-mobile .footer-logo :global(.footer-logo-image) {
+                        display: block;
+                        object-fit: contain;
+                        max-width: 180px;
+                    }
+                    
+                    .footer-mobile .footer-desc {
+                        margin-bottom: var(--space-5);
+                        max-width: 100%;
+                    }
+                    
+                    .footer-accordion {
                         display: block;
                     }
                 }
 
-                @media(max-width:600px) {
-                    .ft-bot {
+                @media(max-width: 600px) {
+                    .footer-bottom {
                         flex-direction: column;
                         text-align: center;
+                        gap: var(--space-2);
+                    }
+                    
+                    .footer-bottom span {
+                        font-size: 0.625rem;
+                    }
+                }
+
+                @media(max-width: 400px) {
+                    .footer-mobile .footer-logo :global(.footer-logo-image) {
+                        max-width: 160px;
                     }
                 }
             `}</style>

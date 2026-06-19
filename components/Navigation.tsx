@@ -1,11 +1,11 @@
-//components/Navigation.tsx
-
+// components/Navigation.tsx
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useActiveSection } from '@/hooks/useActiveSection';
+import { CONTACT } from '@/lib/constants';
 
 export default function Navigation() {
     const [scrolled, setScrolled] = useState(false);
@@ -36,8 +36,9 @@ export default function Navigation() {
 
     const navItems = [
         { href: '/', label: 'Home', id: '' },
-        { href: '#gallery', label: 'Gallery', id: 'gallery' },
-        { href: '#about', label: 'About', id: 'about' },
+        { href: '#services', label: 'Services', id: 'services' },
+        { href: '#gallery', label: 'Portfolio', id: 'gallery' },
+        { href: '#testimonials', label: 'Reviews', id: 'testimonials' },
         { href: '#contact', label: 'Contact', id: 'contact' },
     ];
 
@@ -45,19 +46,15 @@ export default function Navigation() {
         <>
             <nav id="nav" className={scrolled ? 'scrolled' : ''} role="navigation" aria-label="Main navigation">
                 <Link href="/" className="nav-logo" aria-label="Vivek Artline — home">
-                    <div className="logo-container">
-                        <Image
-                            src="/logo.png"
-                            alt="Vivek Artline Logo"
-                            width={60}
-                            height={60}
-                            className="logo-image"
-                            priority
-                        />
-                    </div>
-                    <div className="logo-text">
-                        <span className="brand">Vivek Artline</span>
-                    </div>
+                    <Image
+                        src="/logo.png"
+                        alt="Vivek Artline"
+                        width={200}
+                        height={70}
+                        priority
+                        className="logo-image"
+                        sizes="(max-width: 768px) 180px, 240px"
+                    />
                 </Link>
 
                 <ul className="nav-links" ref={navLinksRef} role="list">
@@ -77,7 +74,7 @@ export default function Navigation() {
 
                 <div className="nav-actions">
                     <a
-                        href="https://instagram.com/vivek_artline"
+                        href={CONTACT.instagramUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="instagram-btn"
@@ -123,16 +120,15 @@ export default function Navigation() {
 
             <div id="mob-nav" className={mobileOpen ? 'open' : ''} aria-label="Mobile navigation" role="dialog" aria-modal="true">
                 <div className="mob-header">
-                    <div className="mob-logo-container">
-                        <Image
-                            src="/logo.png"
-                            alt="Vivek Artline"
-                            width={32}
-                            height={32}
-                            className="mob-logo-image"
-                        />
-                    </div>
-                    <span className="mob-brand">Vivek Artline</span>
+                    <Image
+                        src="/logo.png"
+                        alt="Vivek Artline"
+                        width={160}
+                        height={55}
+                        priority
+                        className="mob-logo-image"
+                        sizes="180px"
+                    />
                 </div>
 
                 <ul className="mob-list" role="list">
@@ -144,7 +140,6 @@ export default function Navigation() {
                                 className={activeSection === item.id ? 'active' : ''}
                                 aria-current={activeSection === item.id ? 'page' : undefined}
                             >
-                                <span className="mob-num" aria-hidden="true">0{i + 1}</span>
                                 {item.label}
                             </Link>
                         </li>
@@ -158,7 +153,7 @@ export default function Navigation() {
                             <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </Link>
-                    <a href="https://instagram.com/vivek_artline" target="_blank" rel="noopener noreferrer" className="mob-ig">
+                    <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="mob-ig">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <defs>
                                 <linearGradient id="ig-gradient-mob" x1="0%" y1="100%" x2="100%" y2="0%">
@@ -172,7 +167,7 @@ export default function Navigation() {
                             <circle cx="12" cy="12" r="4.5" stroke="url(#ig-gradient-mob)" strokeWidth="1.8" />
                             <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig-gradient-mob)" />
                         </svg>
-                        @vivek_artline
+                        @{CONTACT.instagram}
                     </a>
                 </div>
             </div>
@@ -187,13 +182,13 @@ export default function Navigation() {
                     align-items: center;
                     justify-content: space-between;
                     padding: 0 max(5vw, calc((100% - 1440px) / 2));
-                    height: 72px;
+                    height: 85px;
                     background: transparent;
                     transition: height 0.4s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s ease, box-shadow 0.4s ease;
                 }
 
                 :global(nav#nav.scrolled) {
-                    height: 60px;
+                    height: 68px;
                     background: rgba(240, 232, 220, 0.88);
                     backdrop-filter: saturate(180%) blur(28px);
                     -webkit-backdrop-filter: saturate(180%) blur(28px);
@@ -204,45 +199,25 @@ export default function Navigation() {
                 :global(.nav-logo) {
                     display: flex;
                     align-items: center;
-                    gap: 0.875rem;
                     text-decoration: none;
-                    transition: opacity 0.25s;
+                    transition: opacity 0.25s, transform 0.25s cubic-bezier(0.23, 1, 0.32, 1);
                     flex-shrink: 0;
                 }
 
-                :global(.nav-logo:hover) { opacity: 0.85; }
-
-                :global(.logo-container) {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-shrink: 0;
-                    transition: transform 0.25s cubic-bezier(0.23, 1, 0.32, 1);
-                }
-
-                :global(.nav-logo:hover .logo-container) {
-                    transform: scale(1.05);
+                :global(.nav-logo:hover) {
+                    opacity: 0.85;
+                    transform: scale(1.02);
                 }
 
                 :global(.logo-image) {
-                    width: 52px !important;
-                    height: 52px !important;
-                    object-fit: contain;
+                    width: auto !important;
+                    height: 65px !important;
+                    max-width: 240px;
                     display: block;
                 }
 
-                :global(.logo-text) {
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                :global(.brand) {
-                    font-family: 'Cormorant Garamond', serif;
-                    font-size: 1.1875rem;
-                    font-weight: 600;
-                    letter-spacing: 0.01em;
-                    color: var(--charcoal);
-                    line-height: 1.1;
+                :global(nav#nav.scrolled .logo-image) {
+                    height: 52px !important;
                 }
 
                 /* Navigation links */
@@ -535,7 +510,7 @@ export default function Navigation() {
                 /* Mobile drawer */
                 :global(#mob-nav) {
                     position: fixed;
-                    top: 76px;
+                    top: 90px;
                     right: max(5vw, calc((100% - 1440px) / 2));
                     z-index: 799;
                     width: 260px;
@@ -561,31 +536,16 @@ export default function Navigation() {
                 :global(.mob-header) {
                     display: flex;
                     align-items: center;
-                    gap: 0.75rem;
-                    padding: 1rem 1.125rem 0.75rem;
+                    justify-content: center;
+                    padding: 1.25rem 1.125rem 1rem;
                     border-bottom: 1px solid rgba(125, 37, 53, 0.07);
                 }
 
-                :global(.mob-logo-container) {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-shrink: 0;
-                }
-
                 :global(.mob-logo-image) {
-                    width: 32px !important;
-                    height: 32px !important;
-                    object-fit: contain;
+                    width: auto !important;
+                    height: 50px !important;
+                    max-width: 180px;
                     display: block;
-                }
-
-                :global(.mob-brand) {
-                    font-family: 'Cormorant Garamond', serif;
-                    font-size: 0.9375rem;
-                    font-weight: 600;
-                    color: var(--charcoal);
-                    letter-spacing: 0.01em;
                 }
 
                 :global(.mob-list) {
@@ -601,9 +561,8 @@ export default function Navigation() {
                 :global(.mob-list a) {
                     display: flex;
                     align-items: center;
-                    gap: 0.75rem;
-                    padding: 0.625rem 1.125rem;
-                    font-size: 0.8125rem;
+                    padding: 0.75rem 1.125rem;
+                    font-size: 0.875rem;
                     font-weight: 500;
                     letter-spacing: 0.01em;
                     color: var(--text-secondary);
@@ -619,15 +578,6 @@ export default function Navigation() {
                 :global(.mob-list a.active) {
                     color: var(--burgundy);
                     background: rgba(125, 37, 53, 0.06);
-                }
-
-                :global(.mob-num) {
-                    font-size: 0.5625rem;
-                    font-weight: 600;
-                    letter-spacing: 0.08em;
-                    color: var(--text-tertiary);
-                    min-width: 18px;
-                    font-variant-numeric: tabular-nums;
                 }
 
                 :global(.mob-footer) {
@@ -712,43 +662,46 @@ export default function Navigation() {
                 @media (max-width: 600px) {
                     :global(nav#nav) {
                         padding: 0 5vw;
-                        height: 62px;
+                        height: 70px;
                     }
                     :global(nav#nav.scrolled) {
-                        height: 56px;
+                        height: 60px;
                     }
                     :global(.logo-image) {
-                        width: 44px !important;
+                        height: 52px !important;
+                    }
+                    :global(nav#nav.scrolled .logo-image) {
                         height: 44px !important;
                     }
-                    :global(.brand) {
-                        font-size: 1.0625rem;
-                    }
                     :global(#mob-nav) {
-                        top: 68px;
+                        top: 76px;
                         right: 5vw;
                         width: calc(100vw - 10vw);
                         max-width: 320px;
+                    }
+                    :global(.mob-logo-image) {
+                        height: 45px !important;
                     }
                 }
 
                 @media (max-width: 400px) {
                     :global(nav#nav) {
-                        height: 58px;
+                        height: 65px;
                     }
-                    :global(#mob-nav) {
-                        top: 64px;
+                    :global(nav#nav.scrolled) {
+                        height: 56px;
                     }
                     :global(.logo-image) {
-                        width: 40px !important;
+                        height: 48px !important;
+                    }
+                    :global(nav#nav.scrolled .logo-image) {
                         height: 40px !important;
                     }
-                    :global(.brand) {
-                        font-size: 1rem;
+                    :global(#mob-nav) {
+                        top: 71px;
                     }
                     :global(.mob-logo-image) {
-                        width: 28px !important;
-                        height: 28px !important;
+                        height: 40px !important;
                     }
                 }
 
@@ -771,7 +724,7 @@ export default function Navigation() {
                     :global(#mob-nav),
                     :global(#mob-ov),
                     :global(.nav-indicator),
-                    :global(.logo-container) {
+                    :global(.nav-logo) {
                         transition: none !important;
                         animation: none !important;
                     }

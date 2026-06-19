@@ -1,16 +1,22 @@
-//app/page.tsx
-
+// app/page.tsx
 'use client';
 
+import dynamic from 'next/dynamic';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import Gallery from '@/components/Gallery';
-import Emotion from '@/components/Emotion';
-import About from '@/components/About';
-import Testimonials from '@/components/Testimonials';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/common/WhatsAppButton';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
+
+// Lazy load components for better performance
+const Services = dynamic(() => import('@/components/Services'));
+const FeaturedArtworks = dynamic(() => import('@/components/FeaturedArtworks'));
+const Gallery = dynamic(() => import('@/components/Gallery'));
+const About = dynamic(() => import('@/components/About'));
+const CustomerReactions = dynamic(() => import('@/components/CustomerReactions'));
+const Testimonials = dynamic(() => import('@/components/Testimonials'));
+const Instagram = dynamic(() => import('@/components/Instagram'));
+const Contact = dynamic(() => import('@/components/Contact'));
+const Footer = dynamic(() => import('@/components/Footer'));
 
 export default function Home() {
   useScrollReveal();
@@ -19,12 +25,16 @@ export default function Home() {
     <>
       <Navigation />
       <Hero />
+      <Services />
+      <FeaturedArtworks />
       <Gallery />
-      <Emotion />
       <About />
+      <CustomerReactions />
       <Testimonials />
+      <Instagram />
       <Contact />
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }
