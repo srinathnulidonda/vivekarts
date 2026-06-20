@@ -85,15 +85,17 @@ export default function Gallery() {
 
                 <Container>
                     <div className="gallery-footer reveal">
-                        <span className="gallery-count">500+ Custom Portraits Delivered Across India</span>
-                        <Button
-                            href="https://www.instagram.com/vivek_artline"
-                            variant="outline"
-                            icon="arrow-right"
-                            external
-                        >
-                            More on Instagram
-                        </Button>
+                        <p className="gallery-tagline">Portraits That Last a Lifetime</p>
+                        <div className="gallery-cta">
+                            <Button
+                                href="https://www.instagram.com/vivek_artline"
+                                variant="outline"
+                                icon="arrow-right"
+                                external
+                            >
+                                More on Instagram
+                            </Button>
+                        </div>
                     </div>
                 </Container>
             </section>
@@ -122,7 +124,7 @@ export default function Gallery() {
                 .gallery-filters {
                     display: flex;
                     gap: 1.75rem;
-                    flex-wrap: wrap;
+                    flex-wrap: nowrap;
                     align-items: center;
                 }
 
@@ -253,16 +255,21 @@ export default function Gallery() {
                     justify-content: space-between;
                     border-top: 1px solid var(--border-subtle);
                     margin-top: var(--space-8);
-                    flex-wrap: wrap;
-                    gap: var(--space-4);
+                    gap: var(--space-6);
                 }
 
-                .gallery-count {
-                    font-size: var(--text-xs);
-                    letter-spacing: 0.12em;
-                    text-transform: uppercase;
-                    color: var(--text-tertiary);
+                .gallery-tagline {
+                    font-family: 'Cormorant Garamond', serif;
+                    font-style: italic;
+                    font-size: 1.375rem;
                     font-weight: 500;
+                    color: var(--burgundy);
+                    margin: 0;
+                    line-height: 1.3;
+                }
+
+                .gallery-cta {
+                    flex-shrink: 0;
                 }
 
                 @media(max-width: 1100px) {
@@ -287,9 +294,26 @@ export default function Gallery() {
                         flex-direction: column;
                         align-items: flex-start;
                     }
+                    .gallery-filters {
+                        width: 100%;
+                        overflow-x: auto;
+                        flex-wrap: nowrap;
+                        gap: 1.25rem;
+                        padding-bottom: 2px;
+                        -webkit-overflow-scrolling: touch;
+                        scrollbar-width: none;
+                    }
+                    .gallery-filters::-webkit-scrollbar {
+                        display: none;
+                    }
+                    .filter-btn {
+                        flex: 0 0 auto;
+                        white-space: nowrap;
+                    }
                     .gallery-footer {
                         flex-direction: column;
                         align-items: flex-start;
+                        gap: var(--space-5);
                     }
                 }
 
@@ -317,6 +341,35 @@ export default function Gallery() {
                     .gallery-item:nth-child(11) { grid-column: 2/3 !important; grid-row: 7/8 !important; }
                     .gallery-art {
                         min-height: 160px !important;
+                    }
+
+                    .gallery-footer {
+                        padding-top: var(--space-6);
+                        margin-top: var(--space-6);
+                        gap: var(--space-4);
+                    }
+
+                    .gallery-tagline {
+                        font-size: 1.125rem;
+                    }
+
+                    .gallery-cta {
+                        width: 100%;
+                    }
+
+                    .gallery-cta :global(a) {
+                        width: 100%;
+                        min-height: 48px;
+                        justify-content: center;
+                    }
+                }
+
+                @media(max-width: 480px) {
+                    .gallery-filters {
+                        gap: 1rem;
+                    }
+                    .filter-btn {
+                        font-size: 0.6875rem;
                     }
                 }
             `}</style>

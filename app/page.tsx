@@ -4,7 +4,7 @@
 import dynamic from 'next/dynamic';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import WhatsAppButton from '@/components/common/WhatsAppButton';
+import InstagramButton from '@/components/common/InstagramButton';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 // Lazy load components for better performance
@@ -34,7 +34,7 @@ export default function Home() {
       <Instagram />
       <Contact />
       <Footer />
-      <WhatsAppButton />
+      <InstagramButton />
     </>
   );
 }

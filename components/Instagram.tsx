@@ -20,6 +20,7 @@ const instagramPosts = [
 ];
 
 export default function Instagram() {
+    // Only track hover on non-touch devices
     const [hoveredPost, setHoveredPost] = useState<number | null>(null);
 
     return (
@@ -71,6 +72,7 @@ export default function Instagram() {
                                     </div>
                                 )}
 
+                                {/* Overlay — hidden on touch devices via CSS, hover-driven on desktop */}
                                 <div className={`post-overlay ${hoveredPost === post.id ? 'active' : ''}`}>
                                     <div className="overlay-content">
                                         <i className="bi bi-heart"></i>
@@ -81,20 +83,6 @@ export default function Instagram() {
                         ))}
                     </div>
 
-                    <div className="instagram-cta">
-                        <a
-                            href={CONTACT.instagramUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn-instagram"
-                        >
-                            <i className="bi bi-instagram"></i>
-                            Follow @{CONTACT.instagram}
-                        </a>
-                        <p className="instagram-subtitle">
-                            Daily inspiration • Work in progress • Behind the scenes
-                        </p>
-                    </div>
                 </Container>
             </section>
 
@@ -156,7 +144,6 @@ export default function Instagram() {
                     display: grid;
                     grid-template-columns: repeat(3, 1fr);
                     gap: 1.5rem;
-                    margin-bottom: var(--space-10);
                 }
 
                 .instagram-post {
@@ -231,86 +218,56 @@ export default function Instagram() {
                     transform: scale(1.2);
                 }
 
-                .instagram-cta {
-                    text-align: center;
-                }
-
-                .btn-instagram {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.75rem;
-                    font-size: var(--text-sm);
-                    font-weight: 600;
-                    letter-spacing: 0.08em;
-                    text-transform: uppercase;
-                    color: white;
-                    text-decoration: none;
-                    padding: 1rem 2.5rem;
-                    border-radius: 50px;
-                    background: linear-gradient(135deg, #833AB4 0%, #E1306C 50%, #F56040 100%);
-                    box-shadow: 0 8px 24px rgba(225, 48, 108, 0.25);
-                    transition: all 0.35s var(--ease-out);
-                }
-
-                .btn-instagram:hover {
-                    transform: translateY(-3px);
-                    box-shadow: 0 12px 32px rgba(225, 48, 108, 0.35);
-                }
-
-                .btn-instagram i {
-                    font-size: 1.3rem;
-                }
-
-                .instagram-subtitle {
-                    margin-top: var(--space-4);
-                    font-size: var(--text-sm);
-                    color: var(--text-secondary);
-                    font-style: italic;
-                }
-
+                /* ─── Tablet ─── */
                 @media (max-width: 900px) {
                     .instagram-grid {
                         gap: 1rem;
                     }
                 }
 
+                /* ─── Mobile ─── */
                 @media (max-width: 768px) {
                     .instagram-section {
                         padding: var(--space-section-mobile) 0;
                     }
 
                     .instagram-grid {
-                        gap: 0.75rem;
+                        gap: 0.5rem;
                     }
 
                     .instagram-post {
-                        border-radius: 6px;
+                        border-radius: 4px;
                     }
 
+                    /* Disable lift animation on touch — keeps grid stable */
                     .instagram-post:hover {
-                        transform: translateY(-4px);
+                        transform: none;
+                        box-shadow: 0 4px 16px rgba(28, 24, 20, 0.08);
                     }
 
                     .video-badge {
-                        top: 0.5rem;
-                        right: 0.5rem;
-                        font-size: 1.2rem;
+                        top: 0.4rem;
+                        right: 0.4rem;
+                        font-size: 1rem;
                     }
 
                     .overlay-content {
-                        gap: 1.5rem;
-                        font-size: 1.5rem;
+                        gap: 1.25rem;
+                        font-size: 1.4rem;
                     }
 
-                    .btn-instagram {
-                        font-size: 0.8rem;
-                        padding: 0.9rem 2rem;
+                    /* Overlay: never stuck-visible on touch — always hidden */
+                    .post-overlay,
+                    .post-overlay.active {
+                        opacity: 0;
+                        pointer-events: none;
                     }
                 }
 
+                /* ─── Very small phones ─── */
                 @media (max-width: 400px) {
                     .instagram-grid {
-                        gap: 0.5rem;
+                        gap: 0.35rem;
                     }
                 }
             `}</style>

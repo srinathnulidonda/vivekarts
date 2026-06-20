@@ -1,7 +1,6 @@
 // components/Hero.tsx
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
 import { usePolaroidTilt } from '@/hooks/usePolaroidTilt';
 import { CONTACT } from '@/lib/constants';
@@ -32,19 +31,19 @@ export default function Hero() {
                         </p>
                         <div className="hero-buttons">
                             <a
-                                href={CONTACT.whatsappLink()}
+                                href="https://www.instagram.com/your_handle/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn-primary"
                             >
-                                <i className="bi bi-whatsapp"></i> Order Custom Portrait
+                                <i className="bi bi-instagram"></i> Order Now
                             </a>
-                            <Link href="#gallery" className="btn-secondary">
+                            <a href="#gallery" className="btn-secondary">
                                 View Portfolio
                                 <span className="play-icon">
                                     <i className="bi bi-arrow-right"></i>
                                 </span>
-                            </Link>
+                            </a>
                         </div>
                     </div>
 
@@ -66,8 +65,6 @@ export default function Hero() {
                             ))}
                         </div>
                     </div>
-
-                    <div className="scroll-hint" aria-hidden="true">Scroll</div>
                 </div>
             </section>
 
@@ -229,9 +226,10 @@ export default function Hero() {
                     text-decoration: none;
                     font-weight: 600;
                     padding: 0.85rem 0.85rem 0.85rem 1.75rem;
-                    border: 1.5px solid var(--border-medium);
+                    border: 1.5px solid var(--border-medium, rgba(28, 24, 20, 0.18));
                     border-radius: 50px;
-                    background: transparent;
+                    background: var(--parchment, #FEFDFB);
+                    box-shadow: 0 2px 8px rgba(28, 24, 20, 0.06);
                     transition: all 0.35s var(--ease-out);
                     font-family: 'Jost', sans-serif;
                 }
@@ -239,8 +237,9 @@ export default function Hero() {
                 .btn-secondary:hover {
                     color: var(--burgundy);
                     border-color: var(--burgundy);
-                    background: rgba(125, 37, 53, 0.04);
-                    box-shadow: 0 8px 24px rgba(125, 37, 53, 0.1);
+                    background: rgba(125, 37, 53, 0.05);
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 24px rgba(125, 37, 53, 0.12);
                 }
 
                 .play-icon {
@@ -260,30 +259,6 @@ export default function Hero() {
                 .btn-secondary:hover .play-icon {
                     background: var(--sienna);
                     transform: translateX(3px);
-                }
-
-                .scroll-hint {
-                    position: absolute;
-                    left: 2.5rem;
-                    bottom: 2.5rem;
-                    z-index: 3;
-                    writing-mode: vertical-rl;
-                    font-size: 0.625rem;
-                    letter-spacing: 0.2em;
-                    text-transform: uppercase;
-                    color: var(--text-tertiary);
-                    display: flex;
-                    align-items: center;
-                    gap: 0.75rem;
-                    opacity: 0;
-                    animation: fadeIn 1s 1.5s ease forwards;
-                }
-
-                .scroll-hint::after {
-                    content: '';
-                    width: 1px;
-                    height: 48px;
-                    background: linear-gradient(to bottom, var(--border-medium), transparent);
                 }
 
                 .hero-visual {
@@ -390,10 +365,6 @@ export default function Hero() {
                         padding: 3.5rem 0 5rem;
                     }
 
-                    .scroll-hint { 
-                        display: none; 
-                    }
-
                     .polaroid-stack {
                         width: 260px;
                         height: 340px;
@@ -416,6 +387,43 @@ export default function Hero() {
                 @media (max-width: 768px) {
                     .hero-container {
                         padding: 0 var(--space-section-x);
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    .hero-buttons {
+                        flex-wrap: nowrap;
+                        gap: clamp(0.4rem, 2.5vw, 0.6rem);
+                        width: 100%;
+                    }
+
+                    .btn-primary,
+                    .btn-secondary {
+                        flex: 1 1 0;
+                        min-width: 0;
+                        justify-content: center;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        padding: 0.7rem 0.5rem;
+                        font-size: clamp(0.5rem, 2.6vw, 0.62rem);
+                        letter-spacing: 0.04em;
+                    }
+
+                    .btn-primary i,
+                    .btn-secondary .play-icon {
+                        flex-shrink: 0;
+                    }
+
+                    .btn-secondary {
+                        gap: 0.4rem;
+                        padding: 0.65rem 0.5rem 0.65rem 0.75rem;
+                    }
+
+                    .play-icon {
+                        width: 18px;
+                        height: 18px;
+                        font-size: 0.5rem;
                     }
                 }
 
@@ -469,6 +477,7 @@ export default function Hero() {
                         transform: rotate(4deg) translate(30px, -14px); 
                     }
                 }
+
             `}</style>
         </>
     );

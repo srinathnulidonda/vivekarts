@@ -6,43 +6,43 @@ import SectionHeader from './common/SectionHeader';
 import { testimonials } from '@/data/testimonials';
 
 export default function Testimonials() {
-    return (
-        <>
-            <section className="testimonials-section" id="testimonials">
-                <Container>
-                    <SectionHeader
-                        eyebrow="Client Stories"
-                        title="Words from "
-                        titleEm="Happy Collectors"
-                        centered
-                    />
+  return (
+    <>
+      <section className="testimonials-section" id="testimonials">
+        <Container>
+          <SectionHeader
+            eyebrow="Client Stories"
+            title="Words from "
+            titleEm="Happy Collectors"
+            centered
+          />
 
-                    <div className="testimonials-grid">
-                        {testimonials.map((testimonial, index) => (
-                            <div
-                                key={testimonial.id}
-                                className="testimonial-card reveal"
-                                style={{ animationDelay: `${index * 0.1}s` }}
-                            >
-                                <div className="quote-mark">"</div>
-                                <div className="stars">
-                                    {'★'.repeat(testimonial.rating)}
-                                </div>
-                                <p className="testimonial-text">{testimonial.text}</p>
-                                <div className="testimonial-author">
-                                    <div className="author-avatar">{testimonial.initial}</div>
-                                    <div className="author-info">
-                                        <div className="author-name">{testimonial.name}</div>
-                                        <div className="author-location">{testimonial.location}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </Container>
-            </section>
+          <div className="testimonials-grid">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={testimonial.id}
+                className="testimonial-card reveal"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="quote-mark">"</div>
+                <div className="stars">
+                  {'★'.repeat(testimonial.rating)}
+                </div>
+                <p className="testimonial-text">{testimonial.text}</p>
+                <div className="testimonial-author">
+                  <div className="author-avatar">{testimonial.initial}</div>
+                  <div className="author-info">
+                    <div className="author-name">{testimonial.name}</div>
+                    <div className="author-location">{testimonial.location}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
 
-            <style jsx>{`
+      <style jsx>{`
                 .testimonials-section {
                     padding: var(--space-section) 0;
                     background: var(--parchment);
@@ -154,6 +154,6 @@ export default function Testimonials() {
                     }
                 }
             `}</style>
-        </>
-    );
+    </>
+  );
 }
