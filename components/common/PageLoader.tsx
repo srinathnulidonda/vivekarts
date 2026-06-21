@@ -40,43 +40,70 @@ export default function PageLoader() {
     return (
         <>
             <style>{`
-        /* Keyframes */
-        @keyframes __va_spin__    { to { transform: rotate(360deg); } }
-        @keyframes __va_reveal__ {
-          from { clip-path: inset(0 101% 0 0); }
-          to   { clip-path: inset(0 0%   0 0); }
-        }
-        @keyframes __va_tipSlide__ {
-          from { left: -2px;          opacity: 1; }
-          90%  { opacity: 1; }
-          to   { left: calc(100% + 2px); opacity: 0; }
-        }
-        @keyframes __va_lineOpen__ {
-          from { transform: scaleX(0); opacity: 0; }
-          to   { transform: scaleX(1); opacity: 1; }
-        }
-        @keyframes __va_dotBounce__ {
-          0%, 60%, 100% { transform: translateY(0);    opacity: 0.25; }
-          30%           { transform: translateY(-7px); opacity: 1;    }
-        }
-        @keyframes __va_shimmer__ {
-          0%   { background-position: -300% center; }
-          100% { background-position:  300% center; }
-        }
-      `}</style>
+                /* Keyframes */
+                @keyframes __va_spin__    { to { transform: rotate(360deg); } }
+                @keyframes __va_reveal__ {
+                    from { clip-path: inset(0 101% 0 0); }
+                    to   { clip-path: inset(0 0%   0 0); }
+                }
+                @keyframes __va_tipSlide__ {
+                    from { left: -2px;             opacity: 1; }
+                    90%  { opacity: 1; }
+                    to   { left: calc(100% + 2px); opacity: 0; }
+                }
+                @keyframes __va_lineOpen__ {
+                    from { transform: scaleX(0); opacity: 0; }
+                    to   { transform: scaleX(1); opacity: 1; }
+                }
+                @keyframes __va_dotBounce__ {
+                    0%, 60%, 100% { transform: translateY(0);    opacity: 0.25; }
+                    30%           { transform: translateY(-7px); opacity: 1;    }
+                }
+                @keyframes __va_shimmer__ {
+                    0%   { background-position: -300% center; }
+                    100% { background-position:  300% center; }
+                }
 
-            {/* Backdrop */}
+                /*
+                 * Backdrop — positioned via class so we can cascade the height
+                 * properly for mobile browsers.
+                 *
+                 * Root cause of the mobile shift:
+                 *   Using inset:0 (bottom:0) on a fixed element means its height
+                 *   is anchored to the current viewport bottom. When the mobile
+                 *   URL bar shows or hides the viewport height changes, the element
+                 *   stretches/shrinks and the flex-centred content jumps.
+                 *
+                 * Fix: use an explicit height anchored to the top-left corner only.
+                 *   100vh  → universal fallback
+                 *   100dvh → dynamic viewport height (iOS 15.4+, Chrome 108+)
+                 *            stays constant regardless of browser chrome changes
+                 */
+                .__va_backdrop__ {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100vh;           /* universal fallback */
+                    height: 100dvh;          /* modern: stable on mobile */
+                    background: #F0E8DC;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    overflow: hidden;        /* contain children — prevents bleed shifting flex centre */
+                    touch-action: none;      /* no scroll-through that can trigger viewport resize */
+                    overscroll-behavior: none;
+                    -webkit-tap-highlight-color: transparent;
+                }
+            `}</style>
+
             <div
+                className="__va_backdrop__"
                 aria-hidden="true"
                 style={{
-                    position: 'fixed',
-                    inset: 0,
+                    /* Only dynamic values stay as inline styles */
                     zIndex: 99999,
-                    background: '#F0E8DC',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     opacity: phase === 'fading' ? 0 : 1,
                     transition: phase === 'fading'
                         ? `opacity ${FADE_MS}ms cubic-bezier(0.23,1,0.32,1)`
@@ -84,15 +111,14 @@ export default function PageLoader() {
                     pointerEvents: phase === 'fading' ? 'none' : 'all',
                 }}
             >
-
-                {/* Brand */}
-                <div style={{ position: 'relative', lineHeight: 1 }}>
+                {/* Brand — maxWidth prevents overflow on very narrow phones */}
+                <div style={{ position: 'relative', lineHeight: 1, maxWidth: '90vw' }}>
 
                     {/* Text */}
                     <div
                         style={{
                             fontFamily: "'Cormorant Garamond', Georgia, 'Times New Roman', serif",
-                            fontSize: 'clamp(2.2rem, 7vw, 3.2rem)',
+                            fontSize: 'clamp(2rem, 7vw, 3.2rem)',
                             fontWeight: 600,
                             color: '#1C1814',
                             letterSpacing: '-0.01em',
@@ -105,7 +131,7 @@ export default function PageLoader() {
                         <em style={{ color: '#7D2535', fontStyle: 'italic' }}>Artline</em>
                     </div>
 
-                    {/* Pencil */}
+                    {/* Pencil tip */}
                     <div
                         style={{
                             position: 'absolute',
@@ -144,7 +170,7 @@ export default function PageLoader() {
                         marginTop: '1rem',
                     }}
                 >
-                    {/* Left */}
+                    {/* Left line */}
                     <div
                         style={{
                             width: '56px',
@@ -154,7 +180,7 @@ export default function PageLoader() {
                             animation: '__va_lineOpen__ 0.6s 0.75s cubic-bezier(0.23,1,0.32,1) both',
                         }}
                     />
-                    {/* Center */}
+                    {/* Diamond */}
                     <div
                         style={{
                             width: '5px',
@@ -166,7 +192,7 @@ export default function PageLoader() {
                             animation: '__va_lineOpen__ 0.4s 0.85s ease both',
                         }}
                     />
-                    {/* Right */}
+                    {/* Right line */}
                     <div
                         style={{
                             width: '56px',
@@ -178,7 +204,7 @@ export default function PageLoader() {
                     />
                 </div>
 
-                {/* Loader */}
+                {/* Bouncing dots */}
                 <div
                     style={{
                         display: 'flex',
@@ -201,7 +227,6 @@ export default function PageLoader() {
                         />
                     ))}
                 </div>
-
             </div>
         </>
     );

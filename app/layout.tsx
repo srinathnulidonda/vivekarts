@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     'Hand-drawn pencil portraits for couples, families, pets, and memorial tributes. Preserving memories through custom artwork.',
   keywords:
     'portrait artist, pencil portraits, custom artwork, Hyderabad, couple portraits, pet portraits',
+  icons: {
+    icon: '/favicon.png',
+  },
   openGraph: {
     title: 'Vivek Artline — Custom Portrait Artist',
     description: 'Hand-drawn pencil portraits preserving your cherished memories',
@@ -39,6 +42,7 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
         />
         <style>{`@keyframes __va_spin__ { to { transform: rotate(360deg); } }`}</style>
+        <link rel="icon" href="/favicon.png" type="image/png" />
       </head>
 
       <body>
