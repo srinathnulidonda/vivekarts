@@ -185,11 +185,11 @@ export default function Navigation() {
                     padding: 0 max(5vw, calc((100% - 1440px) / 2));
                     height: 85px;
                     background: transparent;
-                    transition: height 0.4s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s ease, box-shadow 0.4s ease;
+                    transition: background 0.4s ease, box-shadow 0.4s ease;
                 }
 
                 :global(nav#nav.scrolled) {
-                    height: 68px;
+                    /* height remains 85px */
                     background: rgba(240, 232, 220, 0.88);
                     backdrop-filter: saturate(180%) blur(28px);
                     -webkit-backdrop-filter: saturate(180%) blur(28px);
@@ -215,10 +215,6 @@ export default function Navigation() {
                     height: 65px !important;
                     max-width: 240px;
                     display: block;
-                }
-
-                :global(nav#nav.scrolled .logo-image) {
-                    height: 52px !important;
                 }
 
                 /* Navigation links */
@@ -669,13 +665,10 @@ export default function Navigation() {
                         height: 70px;
                     }
                     :global(nav#nav.scrolled) {
-                        height: 60px;
+                        /* height remains 70px */
                     }
                     :global(.logo-image) {
                         height: 52px !important;
-                    }
-                    :global(nav#nav.scrolled .logo-image) {
-                        height: 44px !important;
                     }
                     :global(#mob-nav) {
                         top: 76px;
@@ -693,13 +686,10 @@ export default function Navigation() {
                         height: 65px;
                     }
                     :global(nav#nav.scrolled) {
-                        height: 56px;
+                        /* height remains 65px */
                     }
                     :global(.logo-image) {
                         height: 48px !important;
-                    }
-                    :global(nav#nav.scrolled .logo-image) {
-                        height: 40px !important;
                     }
                     :global(#mob-nav) {
                         top: 71px;
