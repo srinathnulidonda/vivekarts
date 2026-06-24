@@ -1,6 +1,8 @@
 // components/common/Container.tsx
 'use client';
 
+import React from 'react';
+
 interface ContainerProps {
     children: React.ReactNode;
     className?: string;

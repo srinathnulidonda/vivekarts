@@ -1,40 +1,35 @@
 // data/featured-artworks.ts
-
-export interface FeaturedArtwork {
-    title: string;
-    image: string;
-    category: string;
-}
+import { FeaturedArtwork } from '@/types';
 
 export const featuredArtworks: FeaturedArtwork[] = [
     {
         title: "Anniversary Portrait",
         image: "/assets/featured/1.jpg",
-        category: "Couple"
+        category: "couple"
     },
     {
         title: "Golden Years",
         image: "/assets/featured/2.jpg",
-        category: "Memorial"
+        category: "memorial"
     },
     {
         title: "Best Friends Forever",
         image: "/assets/featured/3.jpg",
-        category: "Pet"
+        category: "pet"
     },
     {
         title: "Family Bonds",
         image: "/assets/featured/4.jpg",
-        category: "Family"
+        category: "family"
     },
     {
         title: "Childhood Innocence",
         image: "/assets/featured/5.jpg",
-        category: "Portrait"
+        category: "portrait"
     },
     {
         title: "Eternal Love",
         image: "/assets/featured/6.jpg",
-        category: "Couple"
+        category: "couple"
     }
 ];

@@ -1,6 +1,7 @@
 // components/Footer.tsx
-'use client';
+'use strict';
 
+import type { JSX } from 'react';
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -237,7 +238,7 @@ export default function Footer() {
                     background: var(--burgundy);
                     color: var(--parchment);
                     border-color: var(--burgundy);
-                    transform: translateY(-3px);
+                    translate: translateY(-3px);
                     box-shadow: 0 4px 12px rgba(125, 37, 53, 0.2);
                 }
 
@@ -353,7 +354,7 @@ export default function Footer() {
                         grid-template-columns: 1.5fr 1fr 1fr;
                         gap: var(--space-8);
                     }
-                    
+
                     .footer-grid .footer-column:first-of-type {
                         grid-column: 1 / -1;
                     }
@@ -363,11 +364,11 @@ export default function Footer() {
                     .footer {
                         padding: var(--space-10) 0 var(--space-5);
                     }
-                    
+
                     .footer-grid {
                         display: none;
                     }
-                    
+
                     .footer-mobile {
                         display: block;
                         margin-bottom: var(--space-6);
@@ -378,12 +379,12 @@ export default function Footer() {
                         object-fit: contain;
                         max-width: 180px;
                     }
-                    
+
                     .footer-mobile .footer-desc {
                         margin-bottom: var(--space-5);
                         max-width: 100%;
                     }
-                    
+
                     .footer-accordion {
                         display: block;
                     }
@@ -395,7 +396,7 @@ export default function Footer() {
                         text-align: center;
                         gap: var(--space-2);
                     }
-                    
+
                     .footer-bottom span {
                         font-size: 0.625rem;
                     }

@@ -4,7 +4,10 @@
 
 import { useState } from 'react';
 
-export const useToast = () => {
+export const useToast = (): {
+    show: boolean;
+    showToast: () => void;
+} => {
     const [show, setShow] = useState(false);
 
     const showToast = () => {

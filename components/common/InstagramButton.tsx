@@ -1,6 +1,7 @@
 //components/common/InstagramButton.tsx
 'use client';
 
+import type { JSX } from 'react';
 import { CONTACT } from '@/lib/constants';
 
 export default function InstagramButton() {
@@ -127,11 +128,11 @@ export default function InstagramButton() {
                         border-bottom-width: 5px;
                         border-left-width: 6px;
                     }
-                    .fab-icon {
+                    .fbicon {
                         width: 48px;
                         height: 48px;
                     }
-                    .fab-icon i {
+                    .fbicon i {
                         font-size: 19px;
                     }
                 }

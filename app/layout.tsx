@@ -2,21 +2,23 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import PageLoader from '@/components/common/PageLoader';
+import { SITE, validateEnvVars } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Vivek Artline — Custom Portrait Artist, Hyderabad',
-  description:
-    'Hand-drawn pencil portraits for couples, families, pets, and memorial tributes. Preserving memories through custom artwork.',
+  title: SITE.title,
+  description: SITE.description,
   keywords:
     'portrait artist, pencil portraits, custom artwork, Hyderabad, couple portraits, pet portraits',
   icons: {
-    icon: '/favicon.png',
+    icon: '/favicon.png', // Next.js auto-injects <link rel="icon"> from this — no manual tag needed
   },
   openGraph: {
-    title: 'Vivek Artline — Custom Portrait Artist',
+    title: `${SITE.name} — Custom Portrait Artist`,
     description: 'Hand-drawn pencil portraits preserving your cherished memories',
     type: 'website',
   },
+  // manifest is handled automatically by app/manifest.ts (MetadataRoute.Manifest convention)
+  // Next.js serves it at /manifest.webmanifest and injects the <link> tag — no manual tag needed
 };
 
 export default function RootLayout({
@@ -24,6 +26,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  validateEnvVars(); // Runs at request time (after env is loaded), not at module evaluation time
+
   return (
     <html lang="en">
       <head>
@@ -38,11 +42,12 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <link
-          rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet"
         />
         <style>{`@keyframes __va_spin__ { to { transform: rotate(360deg); } }`}</style>
-        <link rel="icon" href="/favicon.png" type="image/png" />
+        {/* Removed: <link rel="manifest"> — auto-injected by Next.js from app/manifest.ts  */}
+        {/* Removed: <link rel="icon"> — auto-injected by Next.js from metadata.icons above */}
       </head>
 
       <body>

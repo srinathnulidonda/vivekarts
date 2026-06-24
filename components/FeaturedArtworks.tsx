@@ -1,12 +1,13 @@
 // components/FeaturedArtworks.tsx
 'use client';
 
+import React from 'react';
 import Image from 'next/image';
 import Container from './common/Container';
 import SectionHeader from './common/SectionHeader';
 import { featuredArtworks } from '@/data/featured-artworks';
 
-export default function FeaturedArtworks() {
+export default function FeaturedArtworks(): React.ReactNode {
     return (
         <>
             <section className="featured-section" id="featured">

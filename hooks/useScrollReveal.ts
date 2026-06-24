@@ -3,7 +3,7 @@
 
 import { useEffect } from 'react';
 
-export const useScrollReveal = () => {
+export const useScrollReveal = (): void => {
     useEffect(() => {
         // Only run on client side
         if (typeof window === 'undefined') return;

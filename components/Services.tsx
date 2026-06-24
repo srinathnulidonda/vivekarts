@@ -1,12 +1,13 @@
 // components/Services.tsx
 'use client';
 
+import React from 'react';
 import Image from 'next/image';
 import Container from './common/Container';
 import SectionHeader from './common/SectionHeader';
 import { services } from '@/data/services';
 
-export default function Services() {
+export default function Services(): React.ReactNode {
   return (
     <>
       <section className="services-section" id="services">
@@ -74,7 +75,7 @@ export default function Services() {
           background: white;
           border-radius: 12px;
           overflow: hidden;
-          box-shadow: 
+          box-shadow:
             0 1px 3px rgba(28, 24, 20, 0.06),
             0 4px 12px rgba(28, 24, 20, 0.08);
           transition: all 0.4s var(--ease-out);
@@ -82,7 +83,7 @@ export default function Services() {
 
         .service-card:hover {
           transform: translateY(-8px);
-          box-shadow: 
+          box-shadow:
             0 4px 12px rgba(28, 24, 20, 0.08),
             0 16px 48px rgba(28, 24, 20, 0.12);
         }
@@ -176,7 +177,7 @@ export default function Services() {
           background: var(--burgundy);
           border-color: var(--burgundy);
           transform: translateY(-2px);
-          box-shadow: 
+          box-shadow:
             0 2px 8px rgba(125, 37, 53, 0.16),
             0 8px 24px rgba(125, 37, 53, 0.12);
         }

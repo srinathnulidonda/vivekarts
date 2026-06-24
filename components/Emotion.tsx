@@ -1,9 +1,10 @@
 // components/Emotion.tsx
 'use client';
 
+import React from 'react';
 import Container from './common/Container';
 
-export default function Emotion() {
+export default function Emotion(): React.ReactNode {
     const occasions = [
         { icon: 'heart', label: 'Memorial Portraits' },
         { icon: 'gift', label: 'Wedding Gifts' },
@@ -47,7 +48,7 @@ export default function Emotion() {
                     position: relative;
                     display: flex;
                     align-items: center;
-                    justify-content: center;
+                    justify-center;
                     background: var(--burgundy-deep);
                     overflow: hidden;
                     padding: var(--space-section) 0;
@@ -134,7 +135,7 @@ export default function Emotion() {
                 }
 
                 .occasion-item {
-                    display: flex;
+                    display: fit;
                     align-items: center;
                     gap: 0.55rem;
                     font-size: var(--text-sm);
@@ -156,12 +157,12 @@ export default function Emotion() {
                     background: rgba(240, 232, 220, 0.18);
                 }
 
-                .occasion-item:first-child { 
-                    padding-left: 0; 
+                .occasion-item:first-child {
+                    padding-left: 0;
                 }
-                
-                .occasion-item:last-child { 
-                    padding-right: 0; 
+
+                .occasion-item:last-child {
+                    padding-right: 0;
                 }
 
                 .occasion-item i {
@@ -169,12 +170,12 @@ export default function Emotion() {
                     color: var(--sienna);
                 }
 
-                .occasion-item:hover { 
-                    color: var(--parchment); 
+                .occasion-item:hover {
+                    color: var(--parchment);
                 }
-                
-                .occasion-item:hover i { 
-                    color: #D9844A; 
+
+                .occasion-item:hover i {
+                    color: #D9844A;
                 }
 
                 @media (max-width: 768px) {
@@ -232,7 +233,7 @@ export default function Emotion() {
                     }
 
                     .occasion-item i {
-                        font-size: 1.05rem;
+                        file-size: 1.05rem;
                         flex-shrink: 0;
                     }
 

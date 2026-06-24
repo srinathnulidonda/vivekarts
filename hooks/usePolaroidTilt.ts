@@ -1,15 +1,14 @@
 // hooks/usePolaroidTilt.ts
-
 'use client';
 
 import { useEffect } from 'react';
 
-export const usePolaroidTilt = () => {
+export const usePolaroidTilt = (): void => {
     useEffect(() => {
         const stack = document.getElementById('polStack');
         if (!stack) return;
 
-        const bases = [
+        const bases: [number, number, number][] = [
             [-8, -70, 35],
             [5, 70, -35],
             [-1.5, 0, 0]
@@ -21,23 +20,29 @@ export const usePolaroidTilt = () => {
             const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
 
             const pols = stack.querySelectorAll('.pol');
-            pols.forEach((pol, i) => {
-                const [baseRotate, baseX, baseY] = bases[i];
-                (pol as HTMLElement).style.transform = `rotate(${baseRotate + x * 4}deg) translate(${baseX + x * 18}px, ${baseY + y * 12}px)`;
-            });
+            const limit = Math.min(pols.length, bases.length);
+            for (let i = 0; i < limit; i++) {
+                const pol = pols[i] as HTMLElement;
+                const base = bases[i]!;
+                const [baseRotate, baseX, baseY] = base;
+                pol.style.transform = `rotate(${baseRotate + x * 4}deg) translate(${baseX + x * 18}px, ${baseY + y * 12}px)`;
+            }
         };
 
         const handleMouseLeave = () => {
-            const transforms = [
+            const transforms: string[] = [
                 'rotate(-8deg) translate(-70px, 35px)',
                 'rotate(5deg) translate(70px, -35px)',
                 'rotate(-1.5deg) translate(0, 0)'
             ];
 
             const pols = stack.querySelectorAll('.pol');
-            pols.forEach((pol, i) => {
-                (pol as HTMLElement).style.transform = transforms[i];
-            });
+            const limit = Math.min(pols.length, transforms.length);
+            for (let i = 0; i < limit; i++) {
+                const pol = pols[i] as HTMLElement;
+                const transform = transforms[i]!;
+                pol.style.transform = transform;
+            }
         };
 
         stack.addEventListener('mousemove', handleMouseMove);

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 type Phase = 'visible' | 'fading' | 'hidden';
 
-const MIN_MS = 850;
+const MIN_MS = 2200;
 const FADE_MS = 550;
 
 export default function PageLoader() {
@@ -40,28 +40,28 @@ export default function PageLoader() {
     return (
         <>
             <style>{`
-                /* Keyframes */
+                /* Keyframes — optimized for GPU */
                 @keyframes __va_spin__    { to { transform: rotate(360deg); } }
-                @keyframes __va_reveal__ {
-                    from { clip-path: inset(0 101% 0 0); }
-                    to   { clip-path: inset(0 0%   0 0); }
+                @keyframes __va_type__ {
+                    from { width: 0; }
+                    to   { width: 100%; }
                 }
                 @keyframes __va_tipSlide__ {
-                    from { left: -2px;             opacity: 1; }
+                    from { transform: translateX(-2px); opacity: 1; }
                     90%  { opacity: 1; }
-                    to   { left: calc(100% + 2px); opacity: 0; }
+                    to   { transform: translateX(calc(100% + 2px)); opacity: 0; }
                 }
                 @keyframes __va_lineOpen__ {
                     from { transform: scaleX(0); opacity: 0; }
                     to   { transform: scaleX(1); opacity: 1; }
                 }
                 @keyframes __va_dotBounce__ {
-                    0%, 60%, 100% { transform: translateY(0);    opacity: 0.25; }
-                    30%           { transform: translateY(-7px); opacity: 1;    }
+                    0%, 60%, 100% { transform: translateY(0); opacity: 0.25; }
+                    30%           { transform: translateY(-7px); opacity: 1; }
                 }
                 @keyframes __va_shimmer__ {
                     0%   { background-position: -300% center; }
-                    100% { background-position:  300% center; }
+                    100% { background-position: 300% center; }
                 }
 
                 /*
@@ -95,6 +95,8 @@ export default function PageLoader() {
                     touch-action: none;      /* no scroll-through that can trigger viewport resize */
                     overscroll-behavior: none;
                     -webkit-tap-highlight-color: transparent;
+                    transform: translateZ(0); /* GPU acceleration */
+                    will-change: transform, opacity;
                 }
             `}</style>
 
@@ -112,9 +114,15 @@ export default function PageLoader() {
                 }}
             >
                 {/* Brand — maxWidth prevents overflow on very narrow phones */}
-                <div style={{ position: 'relative', lineHeight: 1, maxWidth: '90vw' }}>
+                {/* ✅ FIX: removed background from this wrapper — was causing a
+                    visible lighter rectangle due to GPU compositing stacking
+                    #F0E8DC on top of itself across separate compositor layers */}
+                <div style={{ position: 'relative', lineHeight: 1, maxWidth: '90vw', background: 'transparent' }}>
 
                     {/* Text */}
+                    {/* ✅ FIX: removed background from text div — overflow:hidden
+                        clips the typewriter effect cleanly without any background
+                        masking; the backdrop already provides the parchment color */}
                     <div
                         style={{
                             fontFamily: "'Cormorant Garamond', Georgia, 'Times New Roman', serif",
@@ -123,8 +131,10 @@ export default function PageLoader() {
                             color: '#1C1814',
                             letterSpacing: '-0.01em',
                             whiteSpace: 'nowrap',
-                            clipPath: 'inset(0 101% 0 0)',
-                            animation: '__va_reveal__ 0.85s 0.1s cubic-bezier(0.6,0,0.4,1) forwards',
+                            overflow: 'hidden',
+                            width: 0,
+                            background: 'transparent',
+                            animation: '__va_type__ 2s steps(13) forwards 0.1s',
                         }}
                     >
                         Vivek{' '}
@@ -142,6 +152,9 @@ export default function PageLoader() {
                             borderRadius: '50%',
                             background: 'radial-gradient(circle, #5A4033 0%, #7D2535 100%)',
                             boxShadow: '0 0 0 3px rgba(125,37,53,0.15), 0 2px 8px rgba(125,37,53,0.2)',
+                            transform: 'translateX(-2px)',
+                            opacity: 1,
+                            willChange: 'transform, opacity',
                             animation: '__va_tipSlide__ 0.85s 0.1s cubic-bezier(0.6,0,0.4,1) forwards',
                         }}
                     />

@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react';
 
-export const useActiveSection = () => {
+export const useActiveSection = (): string => {
     const [activeSection, setActiveSection] = useState('');
 
     useEffect(() => {

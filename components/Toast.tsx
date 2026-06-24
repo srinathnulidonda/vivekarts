@@ -1,10 +1,13 @@
 //components/Toast.tsx
+'use client';
+
+import React from 'react';
 
 interface Props {
     show: boolean;
 }
 
-export default function Toast({ show }: Props) {
+export default function Toast({ show }: Props): React.ReactNode {
     return (
         <>
             <div id="toast" className={show ? 'show' : ''}>

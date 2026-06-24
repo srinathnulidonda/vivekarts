@@ -1,17 +1,18 @@
 //components/Lightbox.tsx
-
 'use client';
 
+import React from 'react';
 import { GalleryItem } from '@/types';
 
 interface Props {
     close: () => void;
     next: () => void;
     prev: () => void;
-    currentItem: GalleryItem;
+    currentItem: GalleryItem | undefined;
 }
 
-export default function Lightbox({ close, next, prev, currentItem }: Props) {
+export default function Lightbox({ close, next, prev, currentItem }: Props): React.ReactNode {
+    if (!currentItem) return null;
     return (
         <>
             <div id="lb" className="open" onClick={close}>

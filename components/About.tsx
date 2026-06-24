@@ -1,6 +1,7 @@
 // components/About.tsx
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import Container from './common/Container';
 import SectionHeader from './common/SectionHeader';
@@ -101,7 +102,8 @@ export default function About() {
 
         .visual-main {
           position: absolute;
-          inset: 0 80px 90px 0;
+          inset: 0 80px 80px 0;          overflow: hidden;
+          border:  0px 90px 0;
           overflow: hidden;
           border: 1px solid rgba(28, 24, 20, 0.06);
           border-radius: 2px;
@@ -281,7 +283,7 @@ export default function About() {
 
         :global(.btn-read-more):focus-visible,
         :global(.btn-order):focus-visible {
-          outline: 2px solid var(--burgundy);
+          outline: 2px solid var(--parchment);
           outline-offset: 4px;
         }
 
@@ -376,7 +378,7 @@ export default function About() {
 
         /* Small Mobile */
         @media (max-width: 480px) {
-          .about-visual {
+          .about-visl the {
             min-height: 360px;
           }
 

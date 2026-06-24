@@ -1,11 +1,18 @@
 // hooks/useLightbox.ts
-
 'use client';
 
 import { useState, useEffect } from 'react';
 import { GalleryItem } from '@/types';
 
-export const useLightbox = (items: GalleryItem[]) => {
+export const useLightbox = (items: GalleryItem[]): {
+    isOpen: boolean;
+    currentIndex: number;
+    open: (index: number) => void;
+    close: () => void;
+    next: () => void;
+    prev: () => void;
+    currentItem: GalleryItem | undefined
+} => {
     const [isOpen, setIsOpen] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -21,11 +28,11 @@ export const useLightbox = (items: GalleryItem[]) => {
     };
 
     const next = () => {
-        setCurrentIndex((prev) => Math.min(prev + 1, items.length - 1));
+        setCurrentIndex((prev) => Math.min(parseInt((prev + 1).toString()), items.length - 1));
     };
 
     const prev = () => {
-        setCurrentIndex((prev) => Math.max(prev - 1, 0));
+        setCurrentIndex((prev) => Math.max(parseInt((prev - 1).toString()), 0));
     };
 
     useEffect(() => {
@@ -40,5 +47,13 @@ export const useLightbox = (items: GalleryItem[]) => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isOpen]);
 
-    return { isOpen, currentIndex, open, close, next, prev, currentItem: items[currentIndex] };
+    return {
+        isOpen,
+        currentIndex,
+        open,
+        close,
+        next,
+        prev,
+        currentItem: items[currentIndex]
+    };
 };

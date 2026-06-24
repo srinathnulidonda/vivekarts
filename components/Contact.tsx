@@ -1,14 +1,14 @@
 // components/Contact.tsx
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Container from './common/Container';
 import SectionHeader from './common/SectionHeader';
 import { useToast } from '@/hooks/useToast';
 import Toast from './Toast';
 import { CONTACT } from '@/lib/constants';
 
-export default function Contact() {
+export default function Contact(): React.ReactNode {
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -158,8 +158,8 @@ export default function Contact() {
                     font-weight: 600;
                 }
 
-                .form-group input, 
-                .form-group select, 
+                .form-group input,
+                .form-group select,
                 .form-group textarea {
                     background: var(--parchment);
                     border: 1.5px solid var(--border-subtle);
@@ -172,13 +172,13 @@ export default function Contact() {
                     border-radius: 4px;
                 }
 
-                .form-group input::placeholder, 
+                .form-group input::placeholder,
                 .form-group textarea::placeholder {
                     color: var(--text-tertiary);
                 }
 
-                .form-group input:focus, 
-                .form-group select:focus, 
+                .form-group input:focus,
+                .form-group select:focus,
                 .form-group textarea:focus {
                     border-color: var(--burgundy);
                     box-shadow: 0 0 0 3px rgba(125, 37, 53, 0.08);
@@ -228,7 +228,7 @@ export default function Contact() {
                     .contact-form {
                         grid-template-columns: 1fr;
                     }
-                    
+
                     .form-group.full,
                     .submit-button {
                         grid-column: span 1;

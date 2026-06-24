@@ -1,6 +1,9 @@
 // components/common/Button.tsx
 'use client';
 
+import React from 'react';
+import Link from 'next/link';
+
 interface ButtonProps {
     href?: string;
     onClick?: () => void;
@@ -17,7 +20,7 @@ export default function Button({
     children,
     icon,
     external = false
-}: ButtonProps) {
+}: ButtonProps): React.ReactNode {
     const className = `btn btn-${variant}`;
 
     const content = (

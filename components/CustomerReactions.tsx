@@ -1,13 +1,14 @@
 // components/CustomerReactions.tsx
 'use client';
 
+import React from 'react';
 import Image from 'next/image';
 import Container from './common/Container';
 import SectionHeader from './common/SectionHeader';
 import Button from './common/Button';
 import { customerReactions } from '@/data/customer-reactions';
 
-export default function CustomerReactions() {
+export default function CustomerReactions(): React.ReactNode {
     return (
         <>
             <section className="reactions-section" id="reactions">

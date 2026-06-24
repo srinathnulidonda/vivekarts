@@ -1,11 +1,12 @@
 // components/Testimonials.tsx
 'use client';
 
+import React from 'react';
 import Container from './common/Container';
 import SectionHeader from './common/SectionHeader';
 import { testimonials } from '@/data/testimonials';
 
-export default function Testimonials() {
+export default function Testimonials(): React.ReactNode {
   return (
     <>
       <section className="testimonials-section" id="testimonials">

@@ -1,10 +1,5 @@
 // data/services.ts
-
-export interface Service {
-    title: string;
-    description: string;
-    image: string;
-}
+import { Service } from '@/types';
 
 export const services: Service[] = [
     {

@@ -1,12 +1,5 @@
 // data/customer-reactions.ts
-
-export interface CustomerReaction {
-    image: string;
-    alt: string;
-    type: 'delivered' | 'holding' | 'story' | 'whatsapp';
-    caption?: string;
-    customer?: string;
-}
+import { CustomerReaction } from '@/types';
 
 export const customerReactions: CustomerReaction[] = [
     {

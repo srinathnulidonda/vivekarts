@@ -1,6 +1,7 @@
 // components/Gallery.tsx
 'use client';
 
+import React from 'react';
 import { useState, useMemo } from 'react';
 import Container from './common/Container';
 import SectionHeader from './common/SectionHeader';
@@ -9,7 +10,7 @@ import { galleryItems } from '@/data/gallery';
 import { useLightbox } from '@/hooks/useLightbox';
 import Lightbox from './Lightbox';
 
-export default function Gallery() {
+export default function Gallery(): React.ReactNode {
     const [activeFilter, setActiveFilter] = useState('all');
     const { isOpen, currentIndex, open, close, next, prev, currentItem } = useLightbox(galleryItems);
 
@@ -155,7 +156,7 @@ export default function Gallery() {
                     transition: transform 0.3s var(--ease-out);
                 }
 
-                .filter-btn.active, 
+                .filter-btn.active,
                 .filter-btn:hover {
                     color: var(--burgundy);
                 }

@@ -1,6 +1,8 @@
 // components/common/SectionHeader.tsx
 'use client';
 
+import type { JSX } from 'react';
+
 interface SectionHeaderProps {
     eyebrow: string;
     title: string;

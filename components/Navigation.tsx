@@ -1,6 +1,7 @@
 // components/Navigation.tsx
 'use client';
 
+import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -270,6 +271,7 @@ export default function Navigation() {
                     border-radius: 2px;
                     background: var(--burgundy);
                     opacity: 0;
+                    transform: translateX(0);
                     transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s;
                     pointer-events: none;
                 }
@@ -317,7 +319,7 @@ export default function Navigation() {
                     transform: translateY(-2px) scale(1.05);
                     border-color: transparent;
                     background: rgba(255, 255, 255, 0.95);
-                    box-shadow: 
+                    box-shadow:
                         0 8px 24px rgba(188, 48, 129, 0.2),
                         0 4px 12px rgba(244, 113, 51, 0.15),
                         0 0 0 4px rgba(188, 48, 129, 0.08);
@@ -480,12 +482,14 @@ export default function Navigation() {
                 :global(.ham.open span:nth-child(1)) {
                     transform: translateY(6.5px) rotate(45deg);
                 }
+
                 :global(.ham.open span:nth-child(2)) {
                     opacity: 0;
                     transform: scaleX(0);
                 }
+
                 :global(.ham.open span:nth-child(3)) {
-                    transform: translateY(-6.5px) rotate(-45deg);
+                    translate: translateY(-6.5px) rotate(-45deg);
                 }
 
                 /* Mobile overlay */
