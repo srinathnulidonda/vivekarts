@@ -44,6 +44,7 @@ const nextConfig = {
 
   // Compress output
   compress: true,
+  turbopack: {},
 
   // Remove console logs in production
   compiler: {
